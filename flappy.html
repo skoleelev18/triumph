@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Flappy Quiz — PrøveSpill</title>
+<link rel="stylesheet" href="style.css" />
+<link rel="stylesheet" href="flappy.css" />
+</head>
+<body class="game-body">
+<div class="game-topbar">
+  <a href="index.html" class="secondary back-link">← Tilbake</a>
+  <div id="deck-title" class="deck-title"></div>
+  <div class="score-line">
+    Poeng: <span id="score-display">0</span> · Rekord: <span id="highscore-display">0</span>
+  </div>
+</div>
+
+<div class="game-wrap">
+  <canvas id="game-canvas" width="480" height="640"></canvas>
+
+  <div id="overlay-start" class="overlay">
+    <h2>🐦 Flappy Quiz</h2>
+    <p id="overlay-start-text">Trykk mellomrom, W eller klikk for å flakse.</p>
+    <p>Hver gang du får poeng, dukker det opp et spørsmål. Svar riktig for å fortsette!</p>
+    <button id="start-btn">Start spillet</button>
+  </div>
+
+  <div id="overlay-question" class="overlay hidden">
+    <h3 id="question-text"></h3>
+    <div id="question-options" class="question-options"></div>
+    <p id="question-feedback" class="question-feedback"></p>
+  </div>
+
+  <div id="overlay-gameover" class="overlay hidden">
+    <h2>Game over!</h2>
+    <p id="gameover-summary"></p>
+    <button id="restart-btn">Spill igjen</button>
+    <a href="index.html" class="secondary back-link">Tilbake til temaer</a>
+  </div>
+
+  <div id="overlay-empty" class="overlay hidden">
+    <h2>Fant ikke temaet</h2>
+    <p>Velg et tema med minst ett spørsmål på hjemmesiden.</p>
+    <a href="index.html" class="secondary back-link">Til hjemmesiden</a>
+  </div>
+</div>
+
+<script src="js/storage.js"></script>
+<script src="js/flappy.js"></script>
+</body>
+</html>

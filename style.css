@@ -1,0 +1,259 @@
+:root {
+  --bg: #f4f6fb;
+  --card-bg: #ffffff;
+  --text: #1c2333;
+  --muted: #667085;
+  --primary: #4f46e5;
+  --primary-dark: #3f37c9;
+  --accent: #22c55e;
+  --danger: #ef4444;
+  --border: #e2e5ee;
+  --radius: 14px;
+  --shadow: 0 4px 16px rgba(20, 24, 40, 0.06);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: "Segoe UI", system-ui, -apple-system, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.5;
+}
+
+.site-header {
+  text-align: center;
+  padding: 2.5rem 1rem 1.5rem;
+}
+
+.site-header h1 {
+  margin: 0;
+  font-size: 2.2rem;
+}
+
+.tagline {
+  color: var(--muted);
+  margin-top: 0.4rem;
+}
+
+main {
+  max-width: 780px;
+  margin: 0 auto;
+  padding: 0 1rem 3rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.card {
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: 1.5rem;
+}
+
+.card h2 {
+  margin-top: 0;
+}
+
+.hint {
+  color: var(--muted);
+  font-size: 0.92rem;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 0.9rem;
+}
+
+label {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--text);
+}
+
+input[type="text"],
+input[type="number"],
+select,
+textarea {
+  font-family: inherit;
+  font-size: 1rem;
+  font-weight: 400;
+  padding: 0.6rem 0.7rem;
+  border-radius: 8px;
+  border: 1px solid var(--border);
+  background: #fbfcfe;
+  color: var(--text);
+}
+
+textarea {
+  resize: vertical;
+}
+
+.inline-form {
+  flex-direction: row;
+  gap: 0.6rem;
+  margin-top: 1rem;
+}
+
+.inline-form input {
+  flex: 1;
+}
+
+.options-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.9rem;
+}
+
+@media (max-width: 520px) {
+  .options-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.correct-answer {
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 0.6rem 0.9rem;
+  display: flex;
+  gap: 1.2rem;
+  flex-wrap: wrap;
+}
+
+.correct-answer legend {
+  font-weight: 600;
+  padding: 0 0.4rem;
+}
+
+.correct-answer label {
+  flex-direction: row;
+  align-items: center;
+  gap: 0.4rem;
+  font-weight: 400;
+}
+
+button {
+  cursor: pointer;
+  font-family: inherit;
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: #fff;
+  background: var(--primary);
+  border: none;
+  border-radius: 8px;
+  padding: 0.65rem 1.1rem;
+  transition: background 0.15s ease;
+}
+
+button:hover {
+  background: var(--primary-dark);
+}
+
+button.secondary {
+  background: #eef0f7;
+  color: var(--text);
+}
+
+button.secondary:hover {
+  background: #e2e5f2;
+}
+
+button.danger {
+  background: var(--danger);
+}
+
+.hidden {
+  display: none !important;
+}
+
+.deck-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  margin-bottom: 0.5rem;
+}
+
+.deck-card {
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 0.9rem 1rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+}
+
+.deck-info strong {
+  font-size: 1.05rem;
+}
+
+.deck-info .meta {
+  color: var(--muted);
+  font-size: 0.85rem;
+}
+
+.deck-actions {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.deck-actions a,
+.deck-actions button {
+  text-decoration: none;
+  font-size: 0.85rem;
+  padding: 0.45rem 0.8rem;
+}
+
+.empty-state {
+  color: var(--muted);
+  font-style: italic;
+}
+
+#import-status {
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+#import-status.success {
+  color: var(--accent);
+}
+
+#import-status.error {
+  color: var(--danger);
+}
+
+.question-list {
+  margin-top: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.question-item {
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 0.6rem 0.8rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 0.6rem;
+  font-size: 0.9rem;
+}
+
+.site-footer {
+  text-align: center;
+  color: var(--muted);
+  font-size: 0.85rem;
+  padding: 1rem;
+}

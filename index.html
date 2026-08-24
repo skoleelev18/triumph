@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>PrøveSpill</title>
+<link rel="stylesheet" href="style.css" />
+</head>
+<body>
+<header class="site-header">
+  <h1>🎮 PrøveSpill</h1>
+  <p class="tagline">Øv til prøver, eksamen og presentasjoner — gjennom spill.</p>
+</header>
+
+<main>
+  <section class="card" id="decks-section">
+    <h2>Dine temaer</h2>
+    <div id="deck-list" class="deck-list"></div>
+
+    <form id="new-deck-form" class="inline-form">
+      <input type="text" id="new-deck-name" placeholder="Navn på nytt tema (f.eks. «Andre verdenskrig»)" required />
+      <button type="submit">+ Nytt tema</button>
+    </form>
+  </section>
+
+  <section class="card" id="manual-section">
+    <h2>Legg til spørsmål manuelt</h2>
+    <form id="manual-question-form">
+      <label>
+        Tema
+        <select id="manual-deck-select" required></select>
+      </label>
+      <label>
+        Spørsmål
+        <input type="text" id="manual-question-text" placeholder="F.eks. «Når startet andre verdenskrig?»" required />
+      </label>
+      <div class="options-grid">
+        <label>
+          Svaralternativ A
+          <input type="text" id="opt-0" required />
+        </label>
+        <label>
+          Svaralternativ B
+          <input type="text" id="opt-1" required />
+        </label>
+        <label>
+          Svaralternativ C
+          <input type="text" id="opt-2" required />
+        </label>
+        <label>
+          Svaralternativ D
+          <input type="text" id="opt-3" required />
+        </label>
+      </div>
+      <fieldset class="correct-answer">
+        <legend>Riktig svar</legend>
+        <label><input type="radio" name="correct" value="0" checked /> A</label>
+        <label><input type="radio" name="correct" value="1" /> B</label>
+        <label><input type="radio" name="correct" value="2" /> C</label>
+        <label><input type="radio" name="correct" value="3" /> D</label>
+      </fieldset>
+      <button type="submit">+ Legg til spørsmål</button>
+    </form>
+  </section>
+
+  <section class="card" id="ai-section">
+    <h2>🤖 Generer spørsmål med KI</h2>
+    <p class="hint">
+      Ingen KI er koblet direkte på spillet ennå (det krever en egen server for å skjule en API-nøkkel trygt).
+      I stedet lager vi en ferdig prompt du limer inn i f.eks. ChatGPT, Claude eller Gemini —
+      og limer svaret rett tilbake inn her.
+    </p>
+    <form id="ai-prompt-form">
+      <label>
+        Tema / emne
+        <input type="text" id="ai-topic" placeholder="F.eks. «Fotosyntese»" required />
+      </label>
+      <div class="options-grid">
+        <label>
+          Antall spørsmål
+          <input type="number" id="ai-count" min="1" max="20" value="5" required />
+        </label>
+        <label>
+          Vanskelighetsgrad
+          <select id="ai-level">
+            <option value="lett">Lett</option>
+            <option value="middels" selected>Middels</option>
+            <option value="vanskelig">Vanskelig</option>
+          </select>
+        </label>
+      </div>
+      <label>
+        Ekstra kontekst (valgfritt)
+        <textarea id="ai-context" rows="2" placeholder="F.eks. pensumtekst, kapittelnummer, stikkord..."></textarea>
+      </label>
+      <button type="submit">Lag prompt</button>
+    </form>
+
+    <div id="ai-prompt-result" class="hidden">
+      <label>
+        Ferdig prompt (kopier og lim inn hos KI-en din)
+        <textarea id="ai-prompt-output" rows="8" readonly></textarea>
+      </label>
+      <button id="copy-prompt-btn" type="button">📋 Kopier prompt</button>
+    </div>
+
+    <div id="ai-import-block">
+      <label>
+        Lim inn KI-svaret (JSON) her
+        <textarea id="ai-response-input" rows="8" placeholder="Lim inn hele svaret fra KI-en her..."></textarea>
+      </label>
+      <label>
+        Legg spørsmålene til i tema
+        <select id="ai-import-deck-select"></select>
+      </label>
+      <button id="import-questions-btn" type="button">⬇️ Importer spørsmål</button>
+      <p id="import-status"></p>
+    </div>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <p>Laget for egen læring. Data lagres kun lokalt i din nettleser.</p>
+</footer>
+
+<script src="js/storage.js"></script>
+<script src="js/ai-helper.js"></script>
+<script src="js/main.js"></script>
+</body>
+</html>

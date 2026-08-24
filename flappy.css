@@ -1,0 +1,116 @@
+.game-body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 1.2rem 1rem 2rem;
+  gap: 0.8rem;
+  min-height: 100vh;
+}
+
+.game-topbar {
+  width: 100%;
+  max-width: 480px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.6rem;
+  flex-wrap: wrap;
+}
+
+.back-link {
+  display: inline-block;
+  background: #eef0f7;
+  color: var(--text);
+  border-radius: 8px;
+  padding: 0.4rem 0.8rem;
+  font-size: 0.85rem;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.deck-title {
+  font-weight: 700;
+  font-size: 1.05rem;
+}
+
+.score-line {
+  font-size: 0.9rem;
+  color: var(--muted);
+}
+
+.game-wrap {
+  position: relative;
+  width: 100%;
+  max-width: 480px;
+}
+
+#game-canvas {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 480 / 640;
+  display: block;
+  background: linear-gradient(#7ec8e3, #bfe9ff);
+  border-radius: var(--radius);
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow);
+  touch-action: manipulation;
+}
+
+.overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(15, 18, 32, 0.82);
+  color: #fff;
+  border-radius: var(--radius);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  gap: 0.8rem;
+  padding: 1.5rem;
+}
+
+.overlay h2,
+.overlay h3 {
+  margin: 0;
+}
+
+.overlay .back-link {
+  margin-top: 0.4rem;
+}
+
+.overlay button {
+  min-width: 160px;
+}
+
+.question-options {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.6rem;
+  width: 100%;
+  max-width: 380px;
+}
+
+.question-options button {
+  background: #2c3350;
+  white-space: normal;
+  min-height: 3rem;
+}
+
+.question-options button:hover {
+  background: #3a4368;
+}
+
+.question-options button.correct {
+  background: var(--accent) !important;
+}
+
+.question-options button.incorrect {
+  background: var(--danger) !important;
+}
+
+.question-feedback {
+  min-height: 1.2rem;
+  font-weight: 600;
+}
