@@ -2,7 +2,7 @@
 
 Et lite nettbasert spill for å øve til prøver, eksamen og presentasjoner.
 Du lager egne "temaer" med spørsmål (manuelt, eller via en KI-hjelper), og
-øver på dem gjennom Flappy Bird-spillet.
+øver på dem gjennom to spillmoduser: Flappy Bird og Quiz Blackjack.
 
 Ren HTML/CSS/JavaScript — ingen byggeverktøy, ingen backend. Alt lagres
 lokalt i nettleseren din (`localStorage`).
@@ -36,9 +36,14 @@ npx http-server .
    > holder API-nøkkelen skjult og kaller KI-en for deg — det er neste
    > steg om du ønsker det.
 
-3. **Spill!** Trykk «▶ Spill Flappy Quiz» på et tema. Hver gang du får
-   poeng i Flappy Bird, dukker det opp et spørsmål fra temaet ditt.
-   Svarer du feil, er det game over.
+3. **Spill!** Velg en spillmodus på et tema:
+   - **▶ Flappy Quiz** — hver gang du får poeng, dukker det opp et
+     spørsmål fra temaet ditt. Svarer du feil, er det game over.
+   - **🃏 Quiz Blackjack** — spill blackjack med virtuelle chips
+     (Hit / Stand / Double). Taper du hånden, venter 3–5 spørsmål;
+     vinner du, venter 1–3 spørsmål. Riktige svar gir chips du kan
+     bruke som innsats i neste hånd. Går du tom for chips, kan du
+     svare på et bonusspørsmål for å få litt startkapital igjen.
 
 ## Publisere til GitHub Pages
 
@@ -60,20 +65,23 @@ mappen `/ (root)` → Save. Siden blir tilgjengelig på
 
 ```
 quizspill/
-├── index.html        Hjemmeside: temaer, legg til spørsmål, KI-hjelper
-├── flappy.html        Flappy Bird-spillmodus
+├── index.html          Hjemmeside: temaer, legg til spørsmål, KI-hjelper
+├── flappy.html         Flappy Bird-spillmodus
+├── blackjack.html      Quiz Blackjack-spillmodus
 ├── style.css           Delt styling
-├── flappy.css          Styling spesifikk for spillet
+├── flappy.css          Styling spesifikk for Flappy Bird
+├── blackjack.css       Styling spesifikk for Blackjack (bord, kort, sjetonger)
 └── js/
-    ├── storage.js       Lagring av temaer/spørsmål i localStorage
+    ├── storage.js       Lagring av temaer/spørsmål/chips i localStorage
     ├── ai-helper.js     Bygger KI-prompt + tolker JSON-svar
     ├── main.js          Logikk for hjemmesiden
-    └── flappy.js        Spillmotor for Flappy Bird
+    ├── flappy.js        Spillmotor for Flappy Bird
+    └── blackjack.js     Spillmotor for Quiz Blackjack
 ```
 
 ## Veikart
 
 - [x] Flappy Bird-modus med spørsmål ved hvert poeng
-- [ ] Blackjack-modus: tap gir 3–5 spørsmål, vinn gir 1–3 spørsmål,
-      riktige svar gir virtuelle penger til neste hånd
+- [x] Blackjack-modus: tap gir 3–5 spørsmål, vinn gir 1–3 spørsmål,
+      riktige svar gir virtuelle chips til neste hånd
 - [ ] Eventuelt: egen server-funksjon for direkte KI-integrasjon
