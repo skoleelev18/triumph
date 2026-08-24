@@ -4,38 +4,29 @@
 window.AIHelper = (function () {
 
 function buildPrompt({ topic, count, level, context }) {
+  const t = window.I18n.t;
   const levelText =
     {
-      lett: "enkelt/grunnleggende nivå",
-      middels: "middels vanskelighetsgrad",
-      vanskelig: "avansert/vanskelig nivå",
-    }[level] || "middels vanskelighetsgrad";
+      lett: t("aiPromptLevelEasy"),
+      middels: t("aiPromptLevelMedium"),
+      vanskelig: t("aiPromptLevelHard"),
+    }[level] || t("aiPromptLevelMedium");
 
-  const contextLine = context
-    ? `Ekstra kontekst / pensum å ta hensyn til: ${context}\n`
-    : "";
+  const contextLine = context ? t("aiPromptContextLine", { context }) : "";
 
-  return `Lag ${count} spørsmål med flervalgssvar om temaet "${topic}", ment som øving til en prøve/eksamen/presentasjon på ${levelText}.
-${contextLine}Krav:
-- Hvert spørsmål skal ha nøyaktig 4 svaralternativer.
-- Bare ett alternativ skal være riktig.
-- Spørsmålene skal være korte nok til å leses raskt midt i et spill.
-- Svar KUN med gyldig JSON, ingen forklaringstekst før eller etter, i nøyaktig dette formatet:
-
-[
-  {
-    "question": "Spørsmålstekst her?",
-    "options": ["Alternativ A", "Alternativ B", "Alternativ C", "Alternativ D"],
-    "correctIndex": 0
-  }
-]
-
-"correctIndex" er indeksen (0-3) i "options"-listen som er riktig svar.`;
+  return t("aiPromptText", {
+    count,
+    topic,
+    level: levelText,
+    contextLine,
+    languageName: t("languageName"),
+  });
 }
 
 function parseAIResponse(text) {
+  const t = window.I18n.t;
   if (!text || !text.trim()) {
-    throw new Error("Lim inn KI-svaret først.");
+    throw new Error(t("aiPromptFillFirst"));
   }
   // Trekk ut JSON selv om KI-en har pakket det inn i ```json ... ``` eller skrevet tekst rundt.
   let candidate = text.trim();
@@ -54,13 +45,11 @@ function parseAIResponse(text) {
   try {
     parsed = JSON.parse(candidate);
   } catch {
-    throw new Error(
-      "Klarte ikke å tolke svaret som JSON. Sjekk at du limte inn hele svaret fra KI-en."
-    );
+    throw new Error(t("aiPromptParseError"));
   }
 
   if (!Array.isArray(parsed)) {
-    throw new Error("Forventet en liste med spørsmål (JSON-array).");
+    throw new Error(t("aiPromptExpectedArray"));
   }
   return parsed;
 }

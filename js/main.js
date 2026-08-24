@@ -24,6 +24,7 @@ const importQuestionsBtn = document.getElementById("import-questions-btn");
 const importStatus = document.getElementById("import-status");
 
 let expandedDeckId = null;
+const t = window.I18n.t;
 
 function render() {
   const decks = getDecks();
@@ -37,7 +38,7 @@ function renderDeckSelect(selectEl, decks) {
   selectEl.innerHTML = "";
   if (decks.length === 0) {
     const opt = document.createElement("option");
-    opt.textContent = "Opprett et tema først";
+    opt.textContent = t("deckOptionCreateFirst");
     opt.disabled = true;
     opt.selected = true;
     selectEl.appendChild(opt);
@@ -46,7 +47,7 @@ function renderDeckSelect(selectEl, decks) {
   for (const deck of decks) {
     const opt = document.createElement("option");
     opt.value = deck.id;
-    opt.textContent = `${deck.name} (${deck.questions.length} spørsmål)`;
+    opt.textContent = t("deckOptionLabel", { name: deck.name, count: deck.questions.length });
     selectEl.appendChild(opt);
   }
   if (decks.some((d) => d.id === prevValue)) {
@@ -59,7 +60,7 @@ function renderDeckList(decks) {
   if (decks.length === 0) {
     const empty = document.createElement("p");
     empty.className = "empty-state";
-    empty.textContent = "Ingen temaer ennå. Lag ditt første tema under.";
+    empty.textContent = t("noDecksYet");
     deckListEl.appendChild(empty);
     return;
   }
@@ -71,7 +72,7 @@ function renderDeckList(decks) {
     const info = document.createElement("div");
     info.className = "deck-info";
     info.innerHTML = `<strong>${escapeHtml(deck.name)}</strong><br/>
-      <span class="meta">${deck.questions.length} spørsmål · Rekord: ${deck.highScore || 0} poeng</span>`;
+      <span class="meta">${t("deckMeta", { count: deck.questions.length, score: deck.highScore || 0 })}</span>`;
 
     const actions = document.createElement("div");
     actions.className = "deck-actions";
@@ -80,16 +81,16 @@ function renderDeckList(decks) {
     const blackjackLink = document.createElement("a");
     if (deck.questions.length > 0) {
       playLink.href = `flappy.html?deck=${encodeURIComponent(deck.id)}`;
-      playLink.textContent = "▶ Flappy Quiz";
+      playLink.textContent = t("playFlappy");
       blackjackLink.href = `blackjack.html?deck=${encodeURIComponent(deck.id)}`;
-      blackjackLink.textContent = "🃏 Quiz Blackjack";
+      blackjackLink.textContent = t("playBlackjack");
     } else {
       playLink.href = "#";
-      playLink.textContent = "▶ Legg til spørsmål først";
+      playLink.textContent = t("addQuestionsFirstFlappy");
       playLink.style.pointerEvents = "none";
       playLink.style.opacity = "0.5";
       blackjackLink.href = "#";
-      blackjackLink.textContent = "🃏 Legg til spørsmål først";
+      blackjackLink.textContent = t("addQuestionsFirstBlackjack");
       blackjackLink.style.pointerEvents = "none";
       blackjackLink.style.opacity = "0.5";
     }
@@ -105,7 +106,7 @@ function renderDeckList(decks) {
 
     const toggleBtn = document.createElement("button");
     toggleBtn.className = "secondary";
-    toggleBtn.textContent = expandedDeckId === deck.id ? "Skjul spørsmål" : "Se spørsmål";
+    toggleBtn.textContent = expandedDeckId === deck.id ? t("hideQuestions") : t("showQuestions");
     toggleBtn.addEventListener("click", () => {
       expandedDeckId = expandedDeckId === deck.id ? null : deck.id;
       renderDeckList(decks);
@@ -113,14 +114,14 @@ function renderDeckList(decks) {
 
     const exportBtn = document.createElement("button");
     exportBtn.className = "secondary";
-    exportBtn.textContent = "Eksporter";
+    exportBtn.textContent = t("exportBtn");
     exportBtn.addEventListener("click", () => downloadDeck(deck.id));
 
     const deleteBtn = document.createElement("button");
     deleteBtn.className = "danger";
-    deleteBtn.textContent = "Slett tema";
+    deleteBtn.textContent = t("deleteDeckBtn");
     deleteBtn.addEventListener("click", () => {
-      if (confirm(`Slette temaet «${deck.name}» og alle spørsmålene i det?`)) {
+      if (confirm(t("confirmDeleteDeck", { name: deck.name }))) {
         deleteDeck(deck.id);
         render();
       }
@@ -136,7 +137,7 @@ function renderDeckList(decks) {
       if (deck.questions.length === 0) {
         const empty = document.createElement("p");
         empty.className = "empty-state";
-        empty.textContent = "Ingen spørsmål i dette temaet ennå.";
+        empty.textContent = t("noQuestionsInDeck");
         list.appendChild(empty);
       } else {
         for (const q of deck.questions) {
@@ -144,10 +145,10 @@ function renderDeckList(decks) {
           item.className = "question-item";
           const correctText = q.options[q.correctIndex];
           const span = document.createElement("span");
-          span.textContent = `${q.question} — Riktig: ${correctText}`;
+          span.textContent = t("questionListItem", { question: q.question, answer: correctText });
           const del = document.createElement("button");
           del.className = "danger";
-          del.textContent = "Slett";
+          del.textContent = t("deleteBtn");
           del.addEventListener("click", () => {
             deleteQuestion(deck.id, q.id);
             render();
@@ -216,8 +217,8 @@ aiPromptForm.addEventListener("submit", (e) => {
 copyPromptBtn.addEventListener("click", async () => {
   try {
     await navigator.clipboard.writeText(aiPromptOutput.value);
-    copyPromptBtn.textContent = "✅ Kopiert!";
-    setTimeout(() => (copyPromptBtn.textContent = "📋 Kopier prompt"), 1500);
+    copyPromptBtn.textContent = t("aiCopiedBtn");
+    setTimeout(() => (copyPromptBtn.textContent = t("aiCopyBtn")), 1500);
   } catch {
     aiPromptOutput.select();
     document.execCommand("copy");
@@ -230,7 +231,7 @@ importQuestionsBtn.addEventListener("click", () => {
   importStatus.textContent = "";
 
   if (!deckId) {
-    importStatus.textContent = "Velg eller opprett et tema først.";
+    importStatus.textContent = t("aiImportNoDeck");
     importStatus.className = "error";
     return;
   }
@@ -239,11 +240,10 @@ importQuestionsBtn.addEventListener("click", () => {
     const parsed = parseAIResponse(aiResponseInput.value);
     const added = importQuestions(deckId, parsed);
     if (added === 0) {
-      importStatus.textContent =
-        "Fant ingen gyldige spørsmål i svaret. Sjekk formatet og prøv igjen.";
+      importStatus.textContent = t("aiImportNoValid");
       importStatus.className = "error";
     } else {
-      importStatus.textContent = `✅ La til ${added} spørsmål!`;
+      importStatus.textContent = t("aiImportSuccess", { count: added });
       importStatus.className = "success";
       aiResponseInput.value = "";
       render();
@@ -254,4 +254,10 @@ importQuestionsBtn.addEventListener("click", () => {
   }
 });
 
+window.I18n.applyTranslations();
+window.I18n.mountSwitcher(document.getElementById("lang-switcher"));
+document.addEventListener("localechange", () => {
+  window.I18n.applyTranslations();
+  render();
+});
 render();

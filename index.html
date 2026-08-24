@@ -8,121 +8,119 @@
 </head>
 <body>
 <header class="site-header">
+  <div id="lang-switcher" class="lang-switcher"></div>
   <h1>🎮 PrøveSpill</h1>
-  <p class="tagline">Øv til prøver, eksamen og presentasjoner — gjennom spill.</p>
+  <p class="tagline" data-i18n="appTagline"></p>
 </header>
 
 <main>
   <section class="card" id="decks-section">
-    <h2>Dine temaer</h2>
+    <h2 data-i18n="decksHeading"></h2>
     <div id="deck-list" class="deck-list"></div>
 
     <form id="new-deck-form" class="inline-form">
-      <input type="text" id="new-deck-name" placeholder="Navn på nytt tema (f.eks. «Andre verdenskrig»)" required />
-      <button type="submit">+ Nytt tema</button>
+      <input type="text" id="new-deck-name" data-i18n-placeholder="newDeckPlaceholder" required />
+      <button type="submit" data-i18n="newDeckBtn"></button>
     </form>
   </section>
 
   <section class="card" id="manual-section">
-    <h2>Legg til spørsmål manuelt</h2>
+    <h2 data-i18n="manualHeading"></h2>
     <form id="manual-question-form">
       <label>
-        Tema
+        <span data-i18n="manualDeckLabel"></span>
         <select id="manual-deck-select" required></select>
       </label>
       <label>
-        Spørsmål
-        <input type="text" id="manual-question-text" placeholder="F.eks. «Når startet andre verdenskrig?»" required />
+        <span data-i18n="manualQuestionLabel"></span>
+        <input type="text" id="manual-question-text" data-i18n-placeholder="manualQuestionPlaceholder" required />
       </label>
       <div class="options-grid">
         <label>
-          Svaralternativ A
+          <span data-i18n="optionALabel"></span>
           <input type="text" id="opt-0" required />
         </label>
         <label>
-          Svaralternativ B
+          <span data-i18n="optionBLabel"></span>
           <input type="text" id="opt-1" required />
         </label>
         <label>
-          Svaralternativ C
+          <span data-i18n="optionCLabel"></span>
           <input type="text" id="opt-2" required />
         </label>
         <label>
-          Svaralternativ D
+          <span data-i18n="optionDLabel"></span>
           <input type="text" id="opt-3" required />
         </label>
       </div>
       <fieldset class="correct-answer">
-        <legend>Riktig svar</legend>
+        <legend data-i18n="correctAnswerLegend"></legend>
         <label><input type="radio" name="correct" value="0" checked /> A</label>
         <label><input type="radio" name="correct" value="1" /> B</label>
         <label><input type="radio" name="correct" value="2" /> C</label>
         <label><input type="radio" name="correct" value="3" /> D</label>
       </fieldset>
-      <button type="submit">+ Legg til spørsmål</button>
+      <button type="submit" data-i18n="addQuestionBtn"></button>
     </form>
   </section>
 
   <section class="card" id="ai-section">
-    <h2>🤖 Generer spørsmål med KI</h2>
-    <p class="hint">
-      Ingen KI er koblet direkte på spillet ennå (det krever en egen server for å skjule en API-nøkkel trygt).
-      I stedet lager vi en ferdig prompt du limer inn i f.eks. ChatGPT, Claude eller Gemini —
-      og limer svaret rett tilbake inn her.
-    </p>
+    <h2 data-i18n="aiHeading"></h2>
+    <p class="hint" data-i18n="aiHint"></p>
     <form id="ai-prompt-form">
       <label>
-        Tema / emne
-        <input type="text" id="ai-topic" placeholder="F.eks. «Fotosyntese»" required />
+        <span data-i18n="aiTopicLabel"></span>
+        <input type="text" id="ai-topic" data-i18n-placeholder="aiTopicPlaceholder" required />
       </label>
       <div class="options-grid">
         <label>
-          Antall spørsmål
+          <span data-i18n="aiCountLabel"></span>
           <input type="number" id="ai-count" min="1" max="20" value="5" required />
         </label>
         <label>
-          Vanskelighetsgrad
+          <span data-i18n="aiLevelLabel"></span>
           <select id="ai-level">
-            <option value="lett">Lett</option>
-            <option value="middels" selected>Middels</option>
-            <option value="vanskelig">Vanskelig</option>
+            <option value="lett" data-i18n="aiLevelEasy"></option>
+            <option value="middels" selected data-i18n="aiLevelMedium"></option>
+            <option value="vanskelig" data-i18n="aiLevelHard"></option>
           </select>
         </label>
       </div>
       <label>
-        Ekstra kontekst (valgfritt)
-        <textarea id="ai-context" rows="2" placeholder="F.eks. pensumtekst, kapittelnummer, stikkord..."></textarea>
+        <span data-i18n="aiContextLabel"></span>
+        <textarea id="ai-context" rows="2" data-i18n-placeholder="aiContextPlaceholder"></textarea>
       </label>
-      <button type="submit">Lag prompt</button>
+      <button type="submit" data-i18n="aiMakePromptBtn"></button>
     </form>
 
     <div id="ai-prompt-result" class="hidden">
       <label>
-        Ferdig prompt (kopier og lim inn hos KI-en din)
+        <span data-i18n="aiPromptOutputLabel"></span>
         <textarea id="ai-prompt-output" rows="8" readonly></textarea>
       </label>
-      <button id="copy-prompt-btn" type="button">📋 Kopier prompt</button>
+      <button id="copy-prompt-btn" type="button" data-i18n="aiCopyBtn"></button>
     </div>
 
     <div id="ai-import-block">
       <label>
-        Lim inn KI-svaret (JSON) her
-        <textarea id="ai-response-input" rows="8" placeholder="Lim inn hele svaret fra KI-en her..."></textarea>
+        <span data-i18n="aiResponseLabel"></span>
+        <textarea id="ai-response-input" rows="8" data-i18n-placeholder="aiResponsePlaceholder"></textarea>
       </label>
       <label>
-        Legg spørsmålene til i tema
+        <span data-i18n="aiImportDeckLabel"></span>
         <select id="ai-import-deck-select"></select>
       </label>
-      <button id="import-questions-btn" type="button">⬇️ Importer spørsmål</button>
+      <button id="import-questions-btn" type="button" data-i18n="aiImportBtn"></button>
       <p id="import-status"></p>
     </div>
   </section>
 </main>
 
 <footer class="site-footer">
-  <p>Laget for egen læring. Data lagres kun lokalt i din nettleser.</p>
+  <p data-i18n="footerNote"></p>
 </footer>
 
+<script src="js/i18n.js"></script>
 <script src="js/storage.js"></script>
 <script src="js/ai-helper.js"></script>
 <script src="js/main.js"></script>

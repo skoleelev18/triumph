@@ -24,7 +24,26 @@ body {
   line-height: 1.5;
 }
 
+.lang-switcher {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+}
+
+.lang-select {
+  font-family: inherit;
+  font-size: 0.85rem;
+  font-weight: 600;
+  padding: 0.4rem 0.7rem;
+  border-radius: 999px;
+  border: 1px solid var(--border);
+  background: var(--card-bg);
+  color: var(--text);
+  cursor: pointer;
+}
+
 .site-header {
+  position: relative;
   text-align: center;
   padding: 2.5rem 1rem 1.5rem;
 }

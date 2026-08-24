@@ -9,21 +9,23 @@
 </head>
 <body class="game-body">
 <div class="game-topbar">
-  <a href="index.html" class="secondary back-link">← Tilbake</a>
+  <a href="index.html" class="secondary back-link" data-i18n="backLink"></a>
   <div id="deck-title" class="deck-title"></div>
   <div class="score-line">
-    Poeng: <span id="score-display">0</span> · Rekord: <span id="highscore-display">0</span>
+    <span data-i18n="pointsLabel"></span>: <span id="score-display">0</span> ·
+    <span data-i18n="recordLabel"></span>: <span id="highscore-display">0</span>
   </div>
+  <div id="lang-switcher"></div>
 </div>
 
 <div class="game-wrap">
   <canvas id="game-canvas" width="480" height="640"></canvas>
 
   <div id="overlay-start" class="overlay">
-    <h2>🐦 Flappy Quiz</h2>
-    <p id="overlay-start-text">Trykk mellomrom, W eller klikk for å flakse.</p>
-    <p>Hver gang du får poeng, dukker det opp et spørsmål. Svar riktig for å fortsette!</p>
-    <button id="start-btn">Start spillet</button>
+    <h2 data-i18n="flappyTitle"></h2>
+    <p id="overlay-start-text" data-i18n="flappyIntro"></p>
+    <p data-i18n="flappyIntro2"></p>
+    <button id="start-btn" data-i18n="startGameBtn"></button>
   </div>
 
   <div id="overlay-question" class="overlay hidden">
@@ -33,19 +35,20 @@
   </div>
 
   <div id="overlay-gameover" class="overlay hidden">
-    <h2>Game over!</h2>
+    <h2 data-i18n="gameOverTitle"></h2>
     <p id="gameover-summary"></p>
-    <button id="restart-btn">Spill igjen</button>
-    <a href="index.html" class="secondary back-link">Tilbake til temaer</a>
+    <button id="restart-btn" data-i18n="playAgainBtn"></button>
+    <a href="index.html" class="secondary back-link" data-i18n="backToDecks"></a>
   </div>
 
   <div id="overlay-empty" class="overlay hidden">
-    <h2>Fant ikke temaet</h2>
-    <p>Velg et tema med minst ett spørsmål på hjemmesiden.</p>
-    <a href="index.html" class="secondary back-link">Til hjemmesiden</a>
+    <h2 data-i18n="emptyDeckTitle"></h2>
+    <p data-i18n="emptyDeckText"></p>
+    <a href="index.html" class="secondary back-link" data-i18n="toHomepage"></a>
   </div>
 </div>
 
+<script src="js/i18n.js"></script>
 <script src="js/storage.js"></script>
 <script src="js/flappy.js"></script>
 </body>

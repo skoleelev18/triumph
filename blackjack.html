@@ -10,12 +10,13 @@
 </head>
 <body class="game-body">
 <div class="game-topbar">
-  <a href="index.html" class="secondary back-link">← Tilbake</a>
+  <a href="index.html" class="secondary back-link" data-i18n="backLink"></a>
   <div id="deck-title" class="deck-title"></div>
   <div class="chip-badge">
     <span class="chip-badge-icon"></span>
     <span id="chips-display">0</span>
   </div>
+  <div id="lang-switcher"></div>
 </div>
 
 <div class="bj-wrap">
@@ -23,7 +24,7 @@
     <div class="bj-felt-ring"></div>
 
     <div class="bj-row bj-row-dealer">
-      <div class="bj-label">Dealer <span id="dealer-total" class="bj-total"></span></div>
+      <div class="bj-label"><span data-i18n="dealerLabel"></span> <span id="dealer-total" class="bj-total"></span></div>
       <div id="dealer-cards" class="bj-cards"></div>
     </div>
 
@@ -31,33 +32,33 @@
 
     <div class="bj-row bj-row-player">
       <div id="player-cards" class="bj-cards"></div>
-      <div class="bj-label">Deg <span id="player-total" class="bj-total"></span></div>
+      <div class="bj-label"><span data-i18n="playerLabel"></span> <span id="player-total" class="bj-total"></span></div>
     </div>
   </div>
 
   <div id="panel-betting" class="bj-panel">
-    <p class="bj-panel-title">Velg innsats</p>
+    <p class="bj-panel-title" data-i18n="chooseBet"></p>
     <div id="bet-buttons" class="chip-rack"></div>
     <div class="bet-custom">
       <input type="number" id="bet-input" min="1" value="10" />
-      <button id="deal-btn">Del ut kort</button>
+      <button id="deal-btn" data-i18n="dealBtn"></button>
     </div>
   </div>
 
   <div id="panel-playing" class="bj-panel bj-panel-round hidden">
-    <button id="hit-btn" class="round-btn round-btn-hit">Hit</button>
-    <button id="double-btn" class="round-btn round-btn-double">Double</button>
-    <button id="stand-btn" class="round-btn round-btn-stand">Stand</button>
+    <button id="hit-btn" class="round-btn round-btn-hit" data-i18n="hitBtn"></button>
+    <button id="double-btn" class="round-btn round-btn-double" data-i18n="doubleBtn"></button>
+    <button id="stand-btn" class="round-btn round-btn-stand" data-i18n="standBtn"></button>
   </div>
 
   <div id="panel-resolved" class="bj-panel hidden">
     <p id="resolved-text"></p>
-    <button id="continue-btn">Fortsett</button>
+    <button id="continue-btn" data-i18n="continueBtn"></button>
   </div>
 
   <div id="panel-broke" class="bj-panel hidden">
-    <p>Du er blakk! Svar riktig på et spørsmål for å få litt startkapital.</p>
-    <button id="bailout-btn">Få startkapital</button>
+    <p data-i18n="brokeText"></p>
+    <button id="bailout-btn" data-i18n="bailoutBtn"></button>
   </div>
 
   <div id="overlay-question" class="overlay hidden">
@@ -68,12 +69,13 @@
   </div>
 
   <div id="overlay-empty" class="overlay hidden">
-    <h2>Fant ikke temaet</h2>
-    <p>Velg et tema med minst ett spørsmål på hjemmesiden.</p>
-    <a href="index.html" class="secondary back-link">Til hjemmesiden</a>
+    <h2 data-i18n="emptyDeckTitle"></h2>
+    <p data-i18n="emptyDeckText"></p>
+    <a href="index.html" class="secondary back-link" data-i18n="toHomepage"></a>
   </div>
 </div>
 
+<script src="js/i18n.js"></script>
 <script src="js/storage.js"></script>
 <script src="js/blackjack.js"></script>
 </body>

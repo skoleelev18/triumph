@@ -44,6 +44,11 @@ const SUITS = [
   { symbol: "♣", color: "black" },
 ];
 const RANKS = ["2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K", "A"];
+const t = window.I18n.t;
+
+window.I18n.applyTranslations();
+window.I18n.mountSwitcher(document.getElementById("lang-switcher"));
+document.addEventListener("localechange", () => window.I18n.applyTranslations());
 
 if (!deck || !deck.questions || deck.questions.length === 0) {
   overlayEmpty.classList.remove("hidden");
@@ -188,7 +193,7 @@ function initGame() {
     allIn.type = "button";
     const allInLabel = document.createElement("span");
     allInLabel.className = "poker-chip-label";
-    allInLabel.textContent = "Alt";
+    allInLabel.textContent = t("allInLabel");
     allIn.appendChild(allInLabel);
     allIn.addEventListener("click", () => selectChip(allIn, chips));
     betButtonsEl.appendChild(allIn);
@@ -209,7 +214,7 @@ function initGame() {
     dealerHand = [drawCard(), drawCard()];
 
     renderHands({ hideDealerHole: true });
-    bjMessage.textContent = `Innsats: ${bet} chips`;
+    bjMessage.textContent = t("betLabel", { bet });
 
     if (isBlackjack(playerHand)) {
       finishHand();
@@ -286,30 +291,31 @@ function initGame() {
 
     if (outcome === "blackjack") {
       payout = currentBet + Math.floor(currentBet * 1.5);
-      text = `🂡 Blackjack! Du vinner ${payout - currentBet} chips.`;
+      text = t("outcomeBlackjack", { profit: payout - currentBet });
       questionCount = randInt(1, 3);
     } else if (outcome === "win") {
       payout = currentBet * 2;
-      text = `🎉 Du vant! +${payout - currentBet} chips.`;
+      text = t("outcomeWin", { profit: payout - currentBet });
       questionCount = randInt(1, 3);
     } else if (outcome === "push") {
       payout = currentBet;
-      text = "🤝 Uavgjort. Du får innsatsen tilbake.";
+      text = t("outcomePush");
       questionCount = 1;
     } else if (outcome === "bust") {
       payout = 0;
-      text = `💥 Bust! Du tapte ${currentBet} chips.`;
+      text = t("outcomeBust", { bet: currentBet });
       questionCount = randInt(3, 5);
     } else {
       payout = 0;
-      text = `😬 Du tapte ${currentBet} chips.`;
+      text = t("outcomeLose", { bet: currentBet });
       questionCount = randInt(3, 5);
     }
 
     if (payout > 0) addChips(deck.id, payout);
     renderChipsDisplay();
 
-    resolvedText.textContent = `${text} Nå venter ${questionCount} spørsmål — riktig svar gir ${CHIP_REWARD} chips hver.`;
+    resolvedText.textContent =
+      text + t("questionsWaiting", { count: questionCount, reward: CHIP_REWARD });
     showPanel(panelResolved);
     continueBtn.onclick = () => startQuestionRound(questionCount);
   }
@@ -325,12 +331,12 @@ function initGame() {
     function nextQuestion() {
       if (index >= count) {
         overlayQuestion.classList.add("hidden");
-        bjMessage.textContent = `Runde ferdig: ${correct}/${count} riktige, +${correct * CHIP_REWARD} chips.`;
+        bjMessage.textContent = t("roundDone", { correct, count, chips: correct * CHIP_REWARD });
         goToBetting();
         return;
       }
       index++;
-      questionProgress.textContent = `Spørsmål ${index} av ${count}`;
+      questionProgress.textContent = t("questionProgress", { index, count });
 
       let q;
       const pool = deck.questions;
@@ -368,13 +374,13 @@ function initGame() {
         addChips(deck.id, CHIP_REWARD);
         renderChipsDisplay();
         btn.classList.add("correct");
-        questionFeedback.textContent = `✅ Riktig! +${CHIP_REWARD} chips`;
+        questionFeedback.textContent = t("answerCorrectChips", { reward: CHIP_REWARD });
         questionFeedback.style.color = "#4ade80";
       } else {
         btn.classList.add("incorrect");
         const correctIdx = order.findIndex((o) => o.correct);
         buttons[correctIdx].classList.add("correct");
-        questionFeedback.textContent = `❌ Feil! Riktig svar: ${q.options[q.correctIndex]}`;
+        questionFeedback.textContent = t("answerWrongWithAnswer", { answer: q.options[q.correctIndex] });
         questionFeedback.style.color = "#f87171";
       }
 
@@ -402,7 +408,7 @@ function initGame() {
     const order = q.options.map((text, i) => ({ text, correct: i === q.correctIndex }));
     shuffle(order);
 
-    questionProgress.textContent = "Bonusspørsmål";
+    questionProgress.textContent = t("bonusQuestion");
     questionText.textContent = q.question;
     questionFeedback.textContent = "";
     questionOptions.innerHTML = "";
@@ -415,13 +421,13 @@ function initGame() {
         if (opt.correct) {
           addChips(deck.id, BAILOUT_CHIPS);
           btn.classList.add("correct");
-          questionFeedback.textContent = `✅ Riktig! +${BAILOUT_CHIPS} chips`;
+          questionFeedback.textContent = t("answerCorrectChips", { reward: BAILOUT_CHIPS });
           questionFeedback.style.color = "#4ade80";
         } else {
           const correctIdx = order.findIndex((o) => o.correct);
           buttons[correctIdx].classList.add("correct");
           btn.classList.add("incorrect");
-          questionFeedback.textContent = `❌ Feil! Prøv igjen om litt.`;
+          questionFeedback.textContent = t("answerWrongTryAgain");
           questionFeedback.style.color = "#f87171";
         }
         setTimeout(() => {

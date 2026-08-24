@@ -23,6 +23,11 @@ const questionText = document.getElementById("question-text");
 const questionOptions = document.getElementById("question-options");
 const questionFeedback = document.getElementById("question-feedback");
 const gameoverSummary = document.getElementById("gameover-summary");
+const t = window.I18n.t;
+
+window.I18n.applyTranslations();
+window.I18n.mountSwitcher(document.getElementById("lang-switcher"));
+document.addEventListener("localechange", () => window.I18n.applyTranslations());
 
 if (!deck || !deck.questions || deck.questions.length === 0) {
   overlayEmpty.classList.remove("hidden");
@@ -127,7 +132,7 @@ function initGame() {
 
     if (isCorrect) {
       btn.classList.add("correct");
-      questionFeedback.textContent = "✅ Riktig! Fortsetter...";
+      questionFeedback.textContent = t("answerCorrectContinuing");
       questionFeedback.style.color = "#4ade80";
       setTimeout(() => {
         overlayQuestion.classList.add("hidden");
@@ -140,7 +145,7 @@ function initGame() {
       btn.classList.add("incorrect");
       const correctIdx = order.findIndex((o) => o.correct);
       buttons[correctIdx].classList.add("correct");
-      questionFeedback.textContent = `❌ Feil! Riktig svar: ${q.options[q.correctIndex]}`;
+      questionFeedback.textContent = t("answerWrongWithAnswer", { answer: q.options[q.correctIndex] });
       questionFeedback.style.color = "#f87171";
       setTimeout(() => {
         overlayQuestion.classList.add("hidden");
@@ -156,8 +161,8 @@ function initGame() {
     highscoreDisplay.textContent = newHigh;
     gameoverSummary.textContent =
       score >= newHigh && score > 0
-        ? `Du fikk ${score} poeng — ny rekord! 🎉`
-        : `Du fikk ${score} poeng. Rekord: ${newHigh}.`;
+        ? t("newRecordSummary", { score })
+        : t("scoreSummary", { score, record: newHigh });
     overlayGameover.classList.remove("hidden");
   }
 
