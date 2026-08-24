@@ -1,4 +1,4 @@
-# 🎮 PrøveSpill
+# 🎮 triumphstudygame
 
 Et lite nettbasert spill for å øve til prøver, eksamen og presentasjoner.
 Du lager egne "temaer" med spørsmål (manuelt, eller via en KI-hjelper), og
