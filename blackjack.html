@@ -5,40 +5,49 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Quiz Blackjack — PrøveSpill</title>
 <link rel="stylesheet" href="style.css" />
+<link rel="stylesheet" href="flappy.css" />
 <link rel="stylesheet" href="blackjack.css" />
 </head>
 <body class="game-body">
 <div class="game-topbar">
   <a href="index.html" class="secondary back-link">← Tilbake</a>
   <div id="deck-title" class="deck-title"></div>
-  <div class="score-line">💰 <span id="chips-display">0</span> chips</div>
+  <div class="chip-badge">
+    <span class="chip-badge-icon"></span>
+    <span id="chips-display">0</span>
+  </div>
 </div>
 
 <div class="bj-wrap">
   <div class="bj-table">
-    <div class="bj-row">
+    <div class="bj-felt-ring"></div>
+
+    <div class="bj-row bj-row-dealer">
       <div class="bj-label">Dealer <span id="dealer-total" class="bj-total"></span></div>
       <div id="dealer-cards" class="bj-cards"></div>
     </div>
-    <div class="bj-row">
-      <div class="bj-label">Deg <span id="player-total" class="bj-total"></span></div>
-      <div id="player-cards" class="bj-cards"></div>
-    </div>
+
     <p id="bj-message" class="bj-message"></p>
+
+    <div class="bj-row bj-row-player">
+      <div id="player-cards" class="bj-cards"></div>
+      <div class="bj-label">Deg <span id="player-total" class="bj-total"></span></div>
+    </div>
   </div>
 
   <div id="panel-betting" class="bj-panel">
-    <p>Velg innsats (du har <span id="bet-chips-available">0</span> chips):</p>
-    <div id="bet-buttons" class="bet-buttons"></div>
+    <p class="bj-panel-title">Velg innsats</p>
+    <div id="bet-buttons" class="chip-rack"></div>
     <div class="bet-custom">
       <input type="number" id="bet-input" min="1" value="10" />
       <button id="deal-btn">Del ut kort</button>
     </div>
   </div>
 
-  <div id="panel-playing" class="bj-panel hidden">
-    <button id="hit-btn">➕ Hit</button>
-    <button id="stand-btn" class="secondary">✋ Stand</button>
+  <div id="panel-playing" class="bj-panel bj-panel-round hidden">
+    <button id="hit-btn" class="round-btn round-btn-hit">Hit</button>
+    <button id="double-btn" class="round-btn round-btn-double">Double</button>
+    <button id="stand-btn" class="round-btn round-btn-stand">Stand</button>
   </div>
 
   <div id="panel-resolved" class="bj-panel hidden">

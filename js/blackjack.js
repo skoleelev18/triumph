@@ -21,9 +21,9 @@ const overlayEmpty = document.getElementById("overlay-empty");
 
 const betButtonsEl = document.getElementById("bet-buttons");
 const betInput = document.getElementById("bet-input");
-const betChipsAvailable = document.getElementById("bet-chips-available");
 const dealBtn = document.getElementById("deal-btn");
 const hitBtn = document.getElementById("hit-btn");
+const doubleBtn = document.getElementById("double-btn");
 const standBtn = document.getElementById("stand-btn");
 const continueBtn = document.getElementById("continue-btn");
 const resolvedText = document.getElementById("resolved-text");
@@ -113,7 +113,16 @@ function initGame() {
     const div = document.createElement("div");
     div.className = "bj-card" + (faceDown ? " hidden-card" : ` ${card.color}`);
     if (!faceDown) {
-      div.textContent = `${card.rank}${card.suit}`;
+      const top = document.createElement("div");
+      top.className = "bj-card-rank";
+      top.textContent = `${card.rank}${card.suit}`;
+      const center = document.createElement("div");
+      center.className = "bj-card-suit-center";
+      center.textContent = card.suit;
+      const bottom = document.createElement("div");
+      bottom.className = "bj-card-rank bottom";
+      bottom.textContent = `${card.rank}${card.suit}`;
+      div.append(top, center, bottom);
     }
     return div;
   }
@@ -147,7 +156,6 @@ function initGame() {
       showPanel(panelBroke);
       return;
     }
-    betChipsAvailable.textContent = chips;
     betInput.max = chips;
     if (Number(betInput.value) > chips) betInput.value = Math.min(chips, 10);
     renderBetButtons(chips);
@@ -156,18 +164,33 @@ function initGame() {
 
   function renderBetButtons(chips) {
     betButtonsEl.innerHTML = "";
+    const selectChip = (btn, amount) => {
+      betInput.value = amount;
+      [...betButtonsEl.children].forEach((b) => b.classList.remove("selected"));
+      btn.classList.add("selected");
+    };
+
     const presets = [5, 10, 25, 50].filter((v) => v <= chips);
     for (const amount of presets) {
       const btn = document.createElement("button");
-      btn.className = "secondary";
-      btn.textContent = amount;
-      btn.addEventListener("click", () => (betInput.value = amount));
+      btn.className = `poker-chip chip-${amount}`;
+      btn.type = "button";
+      const label = document.createElement("span");
+      label.className = "poker-chip-label";
+      label.textContent = amount;
+      btn.appendChild(label);
+      btn.addEventListener("click", () => selectChip(btn, amount));
       betButtonsEl.appendChild(btn);
     }
+
     const allIn = document.createElement("button");
-    allIn.className = "secondary";
-    allIn.textContent = "Alt inn";
-    allIn.addEventListener("click", () => (betInput.value = chips));
+    allIn.className = "poker-chip chip-allin";
+    allIn.type = "button";
+    const allInLabel = document.createElement("span");
+    allInLabel.className = "poker-chip-label";
+    allInLabel.textContent = "Alt";
+    allIn.appendChild(allInLabel);
+    allIn.addEventListener("click", () => selectChip(allIn, chips));
     betButtonsEl.appendChild(allIn);
   }
 
@@ -191,11 +214,14 @@ function initGame() {
     if (isBlackjack(playerHand)) {
       finishHand();
     } else {
+      const remaining = window.Storage.getChips(deck.id);
+      doubleBtn.disabled = remaining < currentBet;
       showPanel(panelPlaying);
     }
   }
 
   function hit() {
+    doubleBtn.disabled = true;
     playerHand.push(drawCard());
     renderHands({ hideDealerHole: true });
     if (handValue(playerHand) > 21) {
@@ -204,6 +230,16 @@ function initGame() {
   }
 
   function stand() {
+    finishHand();
+  }
+
+  function double() {
+    if (doubleBtn.disabled) return;
+    addChips(deck.id, -currentBet);
+    currentBet *= 2;
+    renderChipsDisplay();
+    playerHand.push(drawCard());
+    renderHands({ hideDealerHole: true });
     finishHand();
   }
 
@@ -400,6 +436,7 @@ function initGame() {
   dealBtn.addEventListener("click", deal);
   hitBtn.addEventListener("click", hit);
   standBtn.addEventListener("click", stand);
+  doubleBtn.addEventListener("click", double);
   bailoutBtn.addEventListener("click", bailout);
 
   goToBetting();
