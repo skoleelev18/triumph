@@ -118,6 +118,34 @@ function setHighScore(deckId, score) {
   }
 }
 
+const DEFAULT_CHIPS = 100;
+
+function getChips(deckId) {
+  const deck = getDeck(deckId);
+  if (!deck) return 0;
+  if (typeof deck.chips !== "number") return DEFAULT_CHIPS;
+  return deck.chips;
+}
+
+function addChips(deckId, delta) {
+  const decks = loadDecks();
+  const deck = decks.find((d) => d.id === deckId);
+  if (!deck) return 0;
+  const current = typeof deck.chips === "number" ? deck.chips : DEFAULT_CHIPS;
+  deck.chips = Math.max(0, current + delta);
+  saveDecks(decks);
+  return deck.chips;
+}
+
+function resetChips(deckId, amount) {
+  const decks = loadDecks();
+  const deck = decks.find((d) => d.id === deckId);
+  if (!deck) return 0;
+  deck.chips = typeof amount === "number" ? amount : DEFAULT_CHIPS;
+  saveDecks(decks);
+  return deck.chips;
+}
+
 function exportDeck(deckId) {
   const deck = getDeck(deckId);
   if (!deck) return "";
@@ -145,6 +173,9 @@ return {
   importQuestions,
   deleteQuestion,
   setHighScore,
+  getChips,
+  addChips,
+  resetChips,
   exportDeck,
 };
 

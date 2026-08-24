@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Quiz Blackjack — PrøveSpill</title>
+<link rel="stylesheet" href="style.css" />
+<link rel="stylesheet" href="blackjack.css" />
+</head>
+<body class="game-body">
+<div class="game-topbar">
+  <a href="index.html" class="secondary back-link">← Tilbake</a>
+  <div id="deck-title" class="deck-title"></div>
+  <div class="score-line">💰 <span id="chips-display">0</span> chips</div>
+</div>
+
+<div class="bj-wrap">
+  <div class="bj-table">
+    <div class="bj-row">
+      <div class="bj-label">Dealer <span id="dealer-total" class="bj-total"></span></div>
+      <div id="dealer-cards" class="bj-cards"></div>
+    </div>
+    <div class="bj-row">
+      <div class="bj-label">Deg <span id="player-total" class="bj-total"></span></div>
+      <div id="player-cards" class="bj-cards"></div>
+    </div>
+    <p id="bj-message" class="bj-message"></p>
+  </div>
+
+  <div id="panel-betting" class="bj-panel">
+    <p>Velg innsats (du har <span id="bet-chips-available">0</span> chips):</p>
+    <div id="bet-buttons" class="bet-buttons"></div>
+    <div class="bet-custom">
+      <input type="number" id="bet-input" min="1" value="10" />
+      <button id="deal-btn">Del ut kort</button>
+    </div>
+  </div>
+
+  <div id="panel-playing" class="bj-panel hidden">
+    <button id="hit-btn">➕ Hit</button>
+    <button id="stand-btn" class="secondary">✋ Stand</button>
+  </div>
+
+  <div id="panel-resolved" class="bj-panel hidden">
+    <p id="resolved-text"></p>
+    <button id="continue-btn">Fortsett</button>
+  </div>
+
+  <div id="panel-broke" class="bj-panel hidden">
+    <p>Du er blakk! Svar riktig på et spørsmål for å få litt startkapital.</p>
+    <button id="bailout-btn">Få startkapital</button>
+  </div>
+
+  <div id="overlay-question" class="overlay hidden">
+    <p id="question-progress" class="question-progress"></p>
+    <h3 id="question-text"></h3>
+    <div id="question-options" class="question-options"></div>
+    <p id="question-feedback" class="question-feedback"></p>
+  </div>
+
+  <div id="overlay-empty" class="overlay hidden">
+    <h2>Fant ikke temaet</h2>
+    <p>Velg et tema med minst ett spørsmål på hjemmesiden.</p>
+    <a href="index.html" class="secondary back-link">Til hjemmesiden</a>
+  </div>
+</div>
+
+<script src="js/storage.js"></script>
+<script src="js/blackjack.js"></script>
+</body>
+</html>
