@@ -59,8 +59,6 @@
   flex-direction: column;
   align-items: center;
   gap: 0.5rem;
-  position: relative;
-  z-index: 1;
 }
 
 .bj-label {
@@ -147,8 +145,6 @@
   min-height: 1.4rem;
   margin: 0;
   text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
-  position: relative;
-  z-index: 1;
 }
 
 .bj-panel {
@@ -313,7 +309,8 @@
 .overlay {
   position: absolute;
   inset: 0;
-  background: rgba(10, 12, 24, 0.94);
+  z-index: 5;
+  background: rgba(10, 12, 24, 0.98);
   color: #fff;
   border-radius: var(--radius);
   display: flex;

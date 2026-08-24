@@ -143,7 +143,7 @@ function initGame() {
     [panelBetting, panelPlaying, panelResolved, panelBroke].forEach((p) =>
       p.classList.add("hidden")
     );
-    panel.classList.remove("hidden");
+    if (panel) panel.classList.remove("hidden");
   }
 
   function goToBetting() {
@@ -355,6 +355,7 @@ function initGame() {
         btn.addEventListener("click", () => handleAnswer(opt.correct, btn, order, q));
         questionOptions.appendChild(btn);
       }
+      showPanel(null);
       overlayQuestion.classList.remove("hidden");
     }
 
@@ -430,6 +431,7 @@ function initGame() {
       });
       questionOptions.appendChild(btn);
     }
+    showPanel(null);
     overlayQuestion.classList.remove("hidden");
   }
 
