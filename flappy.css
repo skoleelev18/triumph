@@ -76,6 +76,14 @@
   margin: 0;
 }
 
+.overlay h2 {
+  font-family: var(--arcade-font);
+  font-size: 1.1rem;
+  line-height: 1.6;
+  color: var(--gold);
+  text-shadow: 0 0 12px rgba(245, 184, 61, 0.5);
+}
+
 .overlay .back-link {
   margin-top: 0.4rem;
 }

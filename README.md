@@ -1,8 +1,9 @@
-# 🎮 triumphstudygame
+# 🕹️ Triumph
 
 Et lite nettbasert spill for å øve til prøver, eksamen og presentasjoner.
 Du lager egne "temaer" med spørsmål (manuelt, eller via en KI-hjelper), og
-øver på dem gjennom to spillmoduser: Flappy Bird og Quiz Blackjack.
+øver på dem gjennom tre spillmoduser: Flappy Quiz, Quiz Blackjack og
+Flashcards. Tilgjengelig på norsk og engelsk.
 
 Ren HTML/CSS/JavaScript — ingen byggeverktøy, ingen backend. Alt lagres
 lokalt i nettleseren din (`localStorage`).
@@ -39,18 +40,23 @@ npx http-server .
 3. **Spill!** Velg en spillmodus på et tema:
    - **▶ Flappy Quiz** — hver gang du får poeng, dukker det opp et
      spørsmål fra temaet ditt. Svarer du feil, er det game over.
-   - **🃏 Quiz Blackjack** — spill blackjack med virtuelle chips
-     (Hit / Stand / Double). Taper du hånden, venter 3–5 spørsmål;
-     vinner du, venter 1–3 spørsmål. Riktige svar gir chips du kan
-     bruke som innsats i neste hånd. Går du tom for chips, kan du
-     svare på et bonusspørsmål for å få litt startkapital igjen.
+   - **🃏 Quiz Blackjack** — en rask quiz (5 spørsmål) kommer *før* du
+     spiller. Antall riktige svar bestemmer hvor mange sjetonger du får
+     å spille med i selve blackjack-hånden (Hit / Stand / Double). Går
+     du tom for sjetonger underveis, dukker det automatisk opp en ny
+     quiz så du kan tjene flere.
+   - **🗂️ Flashcards** — bla gjennom spørsmålene som kort. Trykk for å
+     snu kortet og se svaret, og merk om du kunne det eller ikke. Kort
+     du ikke kunne kan du øve på igjen etterpå.
+4. **Bytt språk** når som helst med språkvelgeren øverst på hver side —
+   valget lagres og gjelder på alle sidene.
 
 ## Publisere til GitHub Pages
 
 ```bash
 git init
 git add .
-git commit -m "Første versjon av PrøveSpill"
+git commit -m "Første versjon av Triumph"
 git branch -M main
 git remote add origin https://github.com/<brukernavn>/<repo>.git
 git push -u origin main
@@ -66,22 +72,30 @@ mappen `/ (root)` → Save. Siden blir tilgjengelig på
 ```
 quizspill/
 ├── index.html          Hjemmeside: temaer, legg til spørsmål, KI-hjelper
-├── flappy.html         Flappy Bird-spillmodus
+├── flappy.html         Flappy Quiz-spillmodus
 ├── blackjack.html      Quiz Blackjack-spillmodus
-├── style.css           Delt styling
-├── flappy.css          Styling spesifikk for Flappy Bird
+├── flashcards.html     Flashcards-spillmodus
+├── style.css           Delt styling (inkl. arkade-forside)
+├── flappy.css          Styling delt av alle spillmoduser (topbar, overlays)
 ├── blackjack.css       Styling spesifikk for Blackjack (bord, kort, sjetonger)
+├── flashcards.css      Styling spesifikk for Flashcards (kortvending)
 └── js/
+    ├── i18n.js          Oversettelser (norsk/engelsk) + språkvelger
     ├── storage.js       Lagring av temaer/spørsmål/chips i localStorage
     ├── ai-helper.js     Bygger KI-prompt + tolker JSON-svar
     ├── main.js          Logikk for hjemmesiden
-    ├── flappy.js        Spillmotor for Flappy Bird
-    └── blackjack.js     Spillmotor for Quiz Blackjack
+    ├── flappy.js        Spillmotor for Flappy Quiz
+    ├── blackjack.js     Spillmotor for Quiz Blackjack
+    └── flashcards.js    Spillmotor for Flashcards
 ```
 
 ## Veikart
 
-- [x] Flappy Bird-modus med spørsmål ved hvert poeng
-- [x] Blackjack-modus: tap gir 3–5 spørsmål, vinn gir 1–3 spørsmål,
-      riktige svar gir virtuelle chips til neste hånd
+- [x] Flappy Quiz-modus med spørsmål ved hvert poeng
+- [x] Blackjack-modus: quiz avgjør startsjetonger, ny quiz når du går tom
+- [x] Flashcards-modus
+- [x] Flerspråksstøtte (norsk/engelsk), lett å utvide med flere språk
 - [ ] Eventuelt: egen server-funksjon for direkte KI-integrasjon
+
+---
+🕹️ Triumph — by skoleelev18

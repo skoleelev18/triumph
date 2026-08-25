@@ -1,0 +1,131 @@
+.fc-wrap {
+  position: relative;
+  width: 100%;
+  max-width: 480px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.2rem;
+}
+
+#fc-game {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.2rem;
+}
+
+.flip-card {
+  width: 100%;
+  height: 320px;
+  perspective: 1200px;
+}
+
+.flip-card-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  transition: transform 0.5s cubic-bezier(0.4, 0.2, 0.2, 1);
+  transform-style: preserve-3d;
+  cursor: pointer;
+}
+
+.flip-card.flipped .flip-card-inner {
+  transform: rotateY(180deg);
+}
+
+.flip-card-front,
+.flip-card-back {
+  position: absolute;
+  inset: 0;
+  backface-visibility: hidden;
+  border-radius: var(--radius);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.8rem;
+  padding: 1.5rem;
+  box-shadow: 0 10px 24px rgba(20, 24, 40, 0.18);
+}
+
+.flip-card-front {
+  background: linear-gradient(160deg, #4f46e5, #3f37c9);
+  color: #fff;
+}
+
+.flip-card-back {
+  background: linear-gradient(160deg, #22c55e, #15803d);
+  color: #fff;
+  transform: rotateY(180deg);
+}
+
+.fc-eyebrow {
+  margin: 0;
+  font-size: 0.78rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  opacity: 0.8;
+}
+
+.fc-text {
+  margin: 0;
+  font-size: 1.4rem;
+  font-weight: 700;
+  line-height: 1.35;
+}
+
+.fc-hint {
+  margin: 0;
+  font-size: 0.85rem;
+  opacity: 0.75;
+}
+
+.fc-controls {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  width: 100%;
+}
+
+.fc-controls button {
+  min-width: 160px;
+}
+
+.fc-rate-btn {
+  font-size: 1rem;
+  padding: 0.8rem 1.4rem;
+}
+
+.fc-rate-no {
+  background: var(--danger);
+  box-shadow: 0 4px 0 #b91c1c;
+}
+
+.fc-rate-yes {
+  background: var(--accent);
+  box-shadow: 0 4px 0 #15803d;
+}
+
+.fc-summary-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  width: 100%;
+  align-items: center;
+}
+
+.fc-summary-actions button,
+.fc-summary-actions a {
+  width: 100%;
+  max-width: 260px;
+  text-align: center;
+}
+
+#fc-summary-text {
+  font-weight: 700;
+  font-size: 1.05rem;
+}

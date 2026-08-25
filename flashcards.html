@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Flashcards — Triumph</title>
+<link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="style.css" />
+<link rel="stylesheet" href="flappy.css" />
+<link rel="stylesheet" href="flashcards.css" />
+</head>
+<body class="game-body">
+<div class="game-topbar">
+  <a href="index.html" class="secondary back-link" data-i18n="backLink"></a>
+  <div id="deck-title" class="deck-title"></div>
+  <div class="score-line">
+    <span id="progress-label"></span>
+  </div>
+  <div id="lang-switcher"></div>
+</div>
+
+<div class="fc-wrap">
+  <div id="overlay-empty" class="overlay hidden">
+    <h2 data-i18n="emptyDeckTitle"></h2>
+    <p data-i18n="emptyDeckText"></p>
+    <a href="index.html" class="secondary back-link" data-i18n="toHomepage"></a>
+  </div>
+
+  <div id="fc-game">
+    <div class="flip-card" id="flip-card">
+      <div class="flip-card-inner">
+        <div class="flip-card-front">
+          <p class="fc-eyebrow" data-i18n="fcQuestionLabel"></p>
+          <p id="fc-question" class="fc-text"></p>
+          <p class="fc-hint" data-i18n="fcTapToFlip"></p>
+        </div>
+        <div class="flip-card-back">
+          <p class="fc-eyebrow" data-i18n="fcAnswerLabel"></p>
+          <p id="fc-answer" class="fc-text"></p>
+        </div>
+      </div>
+    </div>
+
+    <div id="fc-flip-controls" class="fc-controls">
+      <button id="flip-btn" data-i18n="fcShowAnswerBtn"></button>
+    </div>
+
+    <div id="fc-rate-controls" class="fc-controls hidden">
+      <button id="fc-unknown-btn" class="fc-rate-btn fc-rate-no" data-i18n="fcDidNotKnowBtn"></button>
+      <button id="fc-known-btn" class="fc-rate-btn fc-rate-yes" data-i18n="fcKnewItBtn"></button>
+    </div>
+  </div>
+
+  <div id="fc-summary" class="bj-panel hidden">
+    <h2 data-i18n="fcSummaryTitle"></h2>
+    <p id="fc-summary-text"></p>
+    <div class="fc-summary-actions">
+      <button id="fc-retry-unknown-btn" class="hidden" data-i18n="fcRetryUnknownBtn"></button>
+      <button id="fc-restart-btn" class="secondary" data-i18n="fcRestartBtn"></button>
+      <a href="index.html" class="secondary back-link" data-i18n="backToDecks"></a>
+    </div>
+  </div>
+</div>
+
+<div class="watermark">by skoleelev18</div>
+
+<script src="js/i18n.js"></script>
+<script src="js/storage.js"></script>
+<script src="js/flashcards.js"></script>
+</body>
+</html>

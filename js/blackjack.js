@@ -15,7 +15,6 @@ const bjMessage = document.getElementById("bj-message");
 const panelBetting = document.getElementById("panel-betting");
 const panelPlaying = document.getElementById("panel-playing");
 const panelResolved = document.getElementById("panel-resolved");
-const panelBroke = document.getElementById("panel-broke");
 const overlayQuestion = document.getElementById("overlay-question");
 const overlayEmpty = document.getElementById("overlay-empty");
 
@@ -27,7 +26,6 @@ const doubleBtn = document.getElementById("double-btn");
 const standBtn = document.getElementById("stand-btn");
 const continueBtn = document.getElementById("continue-btn");
 const resolvedText = document.getElementById("resolved-text");
-const bailoutBtn = document.getElementById("bailout-btn");
 
 const questionProgress = document.getElementById("question-progress");
 const questionText = document.getElementById("question-text");
@@ -35,8 +33,8 @@ const questionOptions = document.getElementById("question-options");
 const questionFeedback = document.getElementById("question-feedback");
 
 const MIN_BET = 5;
-const BAILOUT_CHIPS = 50;
 const CHIP_REWARD = 20;
+const QUIZ_LENGTH = 5;
 const SUITS = [
   { symbol: "♠", color: "black" },
   { symbol: "♥", color: "red" },
@@ -145,9 +143,7 @@ function initGame() {
   }
 
   function showPanel(panel) {
-    [panelBetting, panelPlaying, panelResolved, panelBroke].forEach((p) =>
-      p.classList.add("hidden")
-    );
+    [panelBetting, panelPlaying, panelResolved].forEach((p) => p.classList.add("hidden"));
     if (panel) panel.classList.remove("hidden");
   }
 
@@ -158,7 +154,7 @@ function initGame() {
     playerTotalEl.textContent = "";
     const chips = renderChipsDisplay();
     if (chips < MIN_BET) {
-      showPanel(panelBroke);
+      runChipsQuiz(QUIZ_LENGTH);
       return;
     }
     betInput.max = chips;
@@ -287,56 +283,46 @@ function initGame() {
   function resolveOutcome(outcome) {
     let payout = 0;
     let text = "";
-    let questionCount = 1;
 
     if (outcome === "blackjack") {
       payout = currentBet + Math.floor(currentBet * 1.5);
       text = t("outcomeBlackjack", { profit: payout - currentBet });
-      questionCount = randInt(1, 3);
     } else if (outcome === "win") {
       payout = currentBet * 2;
       text = t("outcomeWin", { profit: payout - currentBet });
-      questionCount = randInt(1, 3);
     } else if (outcome === "push") {
       payout = currentBet;
       text = t("outcomePush");
-      questionCount = 1;
     } else if (outcome === "bust") {
       payout = 0;
       text = t("outcomeBust", { bet: currentBet });
-      questionCount = randInt(3, 5);
     } else {
       payout = 0;
       text = t("outcomeLose", { bet: currentBet });
-      questionCount = randInt(3, 5);
     }
 
     if (payout > 0) addChips(deck.id, payout);
     renderChipsDisplay();
 
-    resolvedText.textContent =
-      text + t("questionsWaiting", { count: questionCount, reward: CHIP_REWARD });
+    resolvedText.textContent = text;
     showPanel(panelResolved);
-    continueBtn.onclick = () => startQuestionRound(questionCount);
+    continueBtn.onclick = goToBetting;
   }
 
-  function randInt(min, max) {
-    return Math.floor(Math.random() * (max - min + 1)) + min;
-  }
-
-  function startQuestionRound(count) {
+  function runChipsQuiz(count) {
     let index = 0;
     let correct = 0;
 
     function nextQuestion() {
       if (index >= count) {
         overlayQuestion.classList.add("hidden");
-        bjMessage.textContent = t("roundDone", { correct, count, chips: correct * CHIP_REWARD });
+        const chips = renderChipsDisplay();
+        bjMessage.textContent = t("quizDone", { correct, count, chips });
         goToBetting();
         return;
       }
       index++;
-      questionProgress.textContent = t("questionProgress", { index, count });
+      questionProgress.textContent = t("quizProgress", { index, count });
 
       let q;
       const pool = deck.questions;
@@ -398,54 +384,12 @@ function initGame() {
     return arr;
   }
 
-  function bailout() {
-    let index = 0;
-    const count = 1;
-    let lastId = null;
-
-    const pool = deck.questions;
-    const q = pool[Math.floor(Math.random() * pool.length)];
-    const order = q.options.map((text, i) => ({ text, correct: i === q.correctIndex }));
-    shuffle(order);
-
-    questionProgress.textContent = t("bonusQuestion");
-    questionText.textContent = q.question;
-    questionFeedback.textContent = "";
-    questionOptions.innerHTML = "";
-    for (const opt of order) {
-      const btn = document.createElement("button");
-      btn.textContent = opt.text;
-      btn.addEventListener("click", () => {
-        const buttons = [...questionOptions.children];
-        buttons.forEach((b) => (b.disabled = true));
-        if (opt.correct) {
-          addChips(deck.id, BAILOUT_CHIPS);
-          btn.classList.add("correct");
-          questionFeedback.textContent = t("answerCorrectChips", { reward: BAILOUT_CHIPS });
-          questionFeedback.style.color = "#4ade80";
-        } else {
-          const correctIdx = order.findIndex((o) => o.correct);
-          buttons[correctIdx].classList.add("correct");
-          btn.classList.add("incorrect");
-          questionFeedback.textContent = t("answerWrongTryAgain");
-          questionFeedback.style.color = "#f87171";
-        }
-        setTimeout(() => {
-          overlayQuestion.classList.add("hidden");
-          goToBetting();
-        }, 1100);
-      });
-      questionOptions.appendChild(btn);
-    }
-    showPanel(null);
-    overlayQuestion.classList.remove("hidden");
-  }
-
   dealBtn.addEventListener("click", deal);
   hitBtn.addEventListener("click", hit);
   standBtn.addEventListener("click", stand);
   doubleBtn.addEventListener("click", double);
-  bailoutBtn.addEventListener("click", bailout);
 
-  goToBetting();
+  resetChips(deck.id, 0);
+  renderChipsDisplay();
+  runChipsQuiz(QUIZ_LENGTH);
 }

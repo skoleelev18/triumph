@@ -79,11 +79,14 @@ function renderDeckList(decks) {
 
     const playLink = document.createElement("a");
     const blackjackLink = document.createElement("a");
+    const flashcardsLink = document.createElement("a");
     if (deck.questions.length > 0) {
       playLink.href = `flappy.html?deck=${encodeURIComponent(deck.id)}`;
       playLink.textContent = t("playFlappy");
       blackjackLink.href = `blackjack.html?deck=${encodeURIComponent(deck.id)}`;
       blackjackLink.textContent = t("playBlackjack");
+      flashcardsLink.href = `flashcards.html?deck=${encodeURIComponent(deck.id)}`;
+      flashcardsLink.textContent = t("playFlashcards");
     } else {
       playLink.href = "#";
       playLink.textContent = t("addQuestionsFirstFlappy");
@@ -93,8 +96,12 @@ function renderDeckList(decks) {
       blackjackLink.textContent = t("addQuestionsFirstBlackjack");
       blackjackLink.style.pointerEvents = "none";
       blackjackLink.style.opacity = "0.5";
+      flashcardsLink.href = "#";
+      flashcardsLink.textContent = t("addQuestionsFirstFlashcards");
+      flashcardsLink.style.pointerEvents = "none";
+      flashcardsLink.style.opacity = "0.5";
     }
-    for (const link of [playLink, blackjackLink]) {
+    for (const link of [playLink, blackjackLink, flashcardsLink]) {
       link.className = "secondary";
       Object.assign(link.style, {
         display: "inline-block",
@@ -127,7 +134,7 @@ function renderDeckList(decks) {
       }
     });
 
-    actions.append(playLink, blackjackLink, toggleBtn, exportBtn, deleteBtn);
+    actions.append(playLink, blackjackLink, flashcardsLink, toggleBtn, exportBtn, deleteBtn);
     card.append(info, actions);
     deckListEl.appendChild(card);
 
