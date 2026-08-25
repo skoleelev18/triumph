@@ -23,13 +23,24 @@ function buildPrompt({ topic, count, level, context }) {
   });
 }
 
+// Mobiltastatur/autokorrektur bytter ofte ut rette anførselstegn med "smarte"
+// buede anførselstegn ved liming, og kan legge inn usynlige tegn. Begge deler
+// ødelegger JSON-strukturen, selv om teksten ser identisk ut visuelt.
+function normalizeText(text) {
+  return text
+    .replace(/[“”„‟]/g, '"')
+    .replace(/[‘’‚‛]/g, "'")
+    .replace(/ /g, " ")
+    .replace(/[​-‍﻿]/g, "");
+}
+
 function parseAIResponse(text) {
   const t = window.I18n.t;
   if (!text || !text.trim()) {
     throw new Error(t("aiPromptFillFirst"));
   }
   // Trekk ut JSON selv om KI-en har pakket det inn i ```json ... ``` eller skrevet tekst rundt.
-  let candidate = text.trim();
+  let candidate = normalizeText(text.trim());
   const fenced = candidate.match(/```(?:json)?\s*([\s\S]*?)```/i);
   if (fenced) {
     candidate = fenced[1].trim();
