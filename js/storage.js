@@ -185,6 +185,15 @@ function exportDeck(deckId) {
   );
 }
 
+function importDeck(data) {
+  if (!data || typeof data.name !== "string" || !Array.isArray(data.questions)) {
+    return null;
+  }
+  const deck = createDeck(data.name);
+  const added = importQuestions(deck.id, data.questions);
+  return { deck, added };
+}
+
 return {
   getDecks,
   getDeck,
@@ -193,6 +202,7 @@ return {
   renameDeck,
   addQuestion,
   importQuestions,
+  importDeck,
   deleteQuestion,
   recordAnswer,
   resetDeckStats,

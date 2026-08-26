@@ -27,7 +27,7 @@
   </div>
 
   <div id="fc-game">
-    <div class="flip-card" id="flip-card">
+    <div class="flip-card" id="flip-card" tabindex="0" role="button" aria-live="polite">
       <div class="flip-card-inner">
         <div class="flip-card-front">
           <p class="fc-eyebrow" data-i18n="fcQuestionLabel"></p>
@@ -53,7 +53,7 @@
 
   <div id="fc-summary" class="bj-panel hidden">
     <h2 data-i18n="fcSummaryTitle"></h2>
-    <p id="fc-summary-text"></p>
+    <p id="fc-summary-text" aria-live="polite"></p>
     <div class="fc-summary-actions">
       <button id="fc-retry-unknown-btn" class="hidden" data-i18n="fcRetryUnknownBtn"></button>
       <button id="fc-restart-btn" class="secondary" data-i18n="fcRestartBtn"></button>

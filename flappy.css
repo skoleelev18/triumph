@@ -114,8 +114,16 @@
   background: var(--accent) !important;
 }
 
+.question-options button.correct::before {
+  content: "✓ ";
+}
+
 .question-options button.incorrect {
   background: var(--danger) !important;
+}
+
+.question-options button.incorrect::before {
+  content: "✗ ";
 }
 
 .question-feedback {

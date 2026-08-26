@@ -323,16 +323,19 @@ button.danger:hover {
   font-style: italic;
 }
 
-#import-status {
+#import-status,
+#deck-import-status {
   font-size: 0.9rem;
   font-weight: 600;
 }
 
-#import-status.success {
+#import-status.success,
+#deck-import-status.success {
   color: var(--accent);
 }
 
-#import-status.error {
+#import-status.error,
+#deck-import-status.error {
   color: var(--danger);
 }
 
