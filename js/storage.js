@@ -100,6 +100,28 @@ function importQuestions(deckId, questions) {
   return added;
 }
 
+function recordAnswer(deckId, questionId, isCorrect) {
+  const decks = loadDecks();
+  const deck = decks.find((d) => d.id === deckId);
+  if (!deck) return;
+  const q = deck.questions.find((q) => q.id === questionId);
+  if (!q) return;
+  if (!q.stats) q.stats = { correct: 0, wrong: 0 };
+  if (isCorrect) q.stats.correct++;
+  else q.stats.wrong++;
+  saveDecks(decks);
+}
+
+function resetDeckStats(deckId) {
+  const decks = loadDecks();
+  const deck = decks.find((d) => d.id === deckId);
+  if (!deck) return;
+  deck.questions.forEach((q) => {
+    q.stats = { correct: 0, wrong: 0 };
+  });
+  saveDecks(decks);
+}
+
 function deleteQuestion(deckId, questionId) {
   const decks = loadDecks();
   const deck = decks.find((d) => d.id === deckId);
@@ -172,6 +194,8 @@ return {
   addQuestion,
   importQuestions,
   deleteQuestion,
+  recordAnswer,
+  resetDeckStats,
   setHighScore,
   getChips,
   addChips,

@@ -129,6 +129,7 @@ function initGame() {
   function handleAnswer(isCorrect, btn, order, q) {
     const buttons = [...questionOptions.children];
     buttons.forEach((b) => (b.disabled = true));
+    window.Storage.recordAnswer(deck.id, q.id, isCorrect);
 
     if (isCorrect) {
       btn.classList.add("correct");

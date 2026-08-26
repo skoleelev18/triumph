@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Fremgang — Triumph</title>
+<link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="style.css" />
+<link rel="stylesheet" href="flappy.css" />
+<link rel="stylesheet" href="progress.css" />
+</head>
+<body class="game-body">
+<div class="game-topbar">
+  <a href="index.html" class="secondary back-link" data-i18n="backLink"></a>
+  <div id="deck-title" class="deck-title"></div>
+  <div id="lang-switcher"></div>
+</div>
+
+<div class="pg-wrap">
+  <div id="overlay-empty" class="overlay hidden" style="position: static; background: none; color: var(--text);">
+    <h2 data-i18n="emptyDeckTitle" style="color: var(--text); text-shadow: none;"></h2>
+    <p data-i18n="emptyDeckText"></p>
+    <a href="index.html" class="secondary back-link" data-i18n="toHomepage"></a>
+  </div>
+
+  <div id="pg-content">
+    <div class="card pg-summary-card">
+      <p class="pg-summary-text" id="pg-summary"></p>
+    </div>
+
+    <div id="pg-list" class="pg-list"></div>
+
+    <div id="pg-not-attempted" class="card">
+      <p class="pg-section-title" data-i18n="notAttemptedHeading"></p>
+      <ul id="pg-not-attempted-list" class="pg-plain-list"></ul>
+    </div>
+
+    <button id="reset-stats-btn" class="danger" data-i18n="resetStatsBtn"></button>
+  </div>
+</div>
+
+<div class="watermark">by skoleelev18</div>
+
+<script src="js/i18n.js"></script>
+<script src="js/storage.js"></script>
+<script src="js/progress.js"></script>
+</body>
+</html>

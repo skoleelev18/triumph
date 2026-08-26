@@ -19,9 +19,11 @@ window.I18n = (function () {
       playFlappy: "▶ Flappy Quiz",
       playBlackjack: "🃏 Quiz Blackjack",
       playFlashcards: "🗂️ Flashcards",
+      playProgress: "📊 Fremgang",
       addQuestionsFirstFlappy: "▶ Legg til spørsmål først",
       addQuestionsFirstBlackjack: "🃏 Legg til spørsmål først",
       addQuestionsFirstFlashcards: "🗂️ Legg til spørsmål først",
+      addQuestionsFirstProgress: "📊 Legg til spørsmål først",
       showQuestions: "Se spørsmål",
       hideQuestions: "Skjul spørsmål",
       exportBtn: "Eksporter",
@@ -130,6 +132,14 @@ window.I18n = (function () {
       fcSummaryText: "Du visste {known} av {total} kort.",
       fcRetryUnknownBtn: "🔁 Øv på de du ikke kunne",
       fcRestartBtn: "🔄 Start på nytt",
+
+      nextQuestionBtn: "Neste spørsmål ➜",
+      progressSummary: "{accuracy}% riktig totalt · {attempted} av {total} spørsmål øvd på",
+      progressNoData: "Du har ikke øvd på noen spørsmål i dette temaet ennå. Spill en runde i en av modusene for å se fremgangen din her!",
+      progressRowStats: "{correct} riktige · {wrong} feil",
+      notAttemptedHeading: "Ikke øvd ennå",
+      resetStatsBtn: "🔄 Nullstill statistikk",
+      confirmResetStats: "Nullstille all statistikk for temaet «{name}»?",
     },
 
     en: {
@@ -146,9 +156,11 @@ window.I18n = (function () {
       playFlappy: "▶ Flappy Quiz",
       playBlackjack: "🃏 Quiz Blackjack",
       playFlashcards: "🗂️ Flashcards",
+      playProgress: "📊 Progress",
       addQuestionsFirstFlappy: "▶ Add questions first",
       addQuestionsFirstBlackjack: "🃏 Add questions first",
       addQuestionsFirstFlashcards: "🗂️ Add questions first",
+      addQuestionsFirstProgress: "📊 Add questions first",
       showQuestions: "Show questions",
       hideQuestions: "Hide questions",
       exportBtn: "Export",
@@ -257,6 +269,14 @@ window.I18n = (function () {
       fcSummaryText: "You knew {known} of {total} cards.",
       fcRetryUnknownBtn: "🔁 Practice the ones you missed",
       fcRestartBtn: "🔄 Start over",
+
+      nextQuestionBtn: "Next question ➜",
+      progressSummary: "{accuracy}% correct overall · {attempted} of {total} questions practiced",
+      progressNoData: "You haven't practiced any questions in this topic yet. Play a round in one of the modes to see your progress here!",
+      progressRowStats: "{correct} correct · {wrong} wrong",
+      notAttemptedHeading: "Not practiced yet",
+      resetStatsBtn: "🔄 Reset stats",
+      confirmResetStats: "Reset all stats for the topic «{name}»?",
     },
   };
 

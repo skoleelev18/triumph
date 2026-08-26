@@ -82,6 +82,7 @@ function initGame() {
   }
 
   function rate(knew) {
+    window.Storage.recordAnswer(deck.id, queue[index].id, knew);
     if (knew) {
       knownCount++;
     } else {

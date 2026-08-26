@@ -31,6 +31,7 @@ const questionProgress = document.getElementById("question-progress");
 const questionText = document.getElementById("question-text");
 const questionOptions = document.getElementById("question-options");
 const questionFeedback = document.getElementById("question-feedback");
+const nextQuestionBtn = document.getElementById("next-question-btn");
 
 const MIN_BET = 5;
 const CHIP_REWARD = 20;
@@ -341,6 +342,7 @@ function initGame() {
       questionText.textContent = q.question;
       questionFeedback.textContent = "";
       questionOptions.innerHTML = "";
+      nextQuestionBtn.classList.add("hidden");
       for (const opt of order) {
         const btn = document.createElement("button");
         btn.textContent = opt.text;
@@ -354,6 +356,7 @@ function initGame() {
     function handleAnswer(isCorrect, btn, order, q) {
       const buttons = [...questionOptions.children];
       buttons.forEach((b) => (b.disabled = true));
+      window.Storage.recordAnswer(deck.id, q.id, isCorrect);
 
       if (isCorrect) {
         correct++;
@@ -370,7 +373,11 @@ function initGame() {
         questionFeedback.style.color = "#f87171";
       }
 
-      setTimeout(nextQuestion, 1100);
+      nextQuestionBtn.classList.remove("hidden");
+      nextQuestionBtn.onclick = () => {
+        nextQuestionBtn.classList.add("hidden");
+        nextQuestion();
+      };
     }
 
     nextQuestion();
