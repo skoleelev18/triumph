@@ -50,6 +50,7 @@ function renderDeckSelect(selectEl, decks) {
   selectEl.innerHTML = "";
   if (decks.length === 0) {
     const opt = document.createElement("option");
+    opt.value = "";
     opt.textContent = t("deckOptionCreateFirst");
     opt.disabled = true;
     opt.selected = true;
