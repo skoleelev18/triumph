@@ -27,6 +27,13 @@ const aiImportDeckSelect = document.getElementById("ai-import-deck-select");
 const aiResponseInput = document.getElementById("ai-response-input");
 const importQuestionsBtn = document.getElementById("import-questions-btn");
 const importStatus = document.getElementById("import-status");
+const lk20LevelSelect = document.getElementById("lk20-level-select");
+const lk20SubjectSelect = document.getElementById("lk20-subject-select");
+const lk20TopicSelect = document.getElementById("lk20-topic-select");
+const lk20UseBtn = document.getElementById("lk20-use-btn");
+const aiTopicInput = document.getElementById("ai-topic");
+const aiContextInput = document.getElementById("ai-context");
+const aiLevelSelect = document.getElementById("ai-level");
 
 let expandedDeckId = null;
 const t = window.I18n.t;
@@ -349,12 +356,66 @@ function importFromUrl() {
   }
 }
 
+function renderLk20Levels() {
+  lk20LevelSelect.innerHTML = "";
+  for (const level of window.LK20.getLevels()) {
+    const opt = document.createElement("option");
+    opt.value = level.id;
+    opt.textContent = window.LK20.localizedName(level);
+    lk20LevelSelect.appendChild(opt);
+  }
+}
+
+function renderLk20Subjects() {
+  const prev = lk20SubjectSelect.value;
+  lk20SubjectSelect.innerHTML = "";
+  const subjects = window.LK20.getSubjectsForLevel(lk20LevelSelect.value);
+  for (const subject of subjects) {
+    const opt = document.createElement("option");
+    opt.value = subject.id;
+    opt.textContent = window.LK20.localizedName(subject);
+    lk20SubjectSelect.appendChild(opt);
+  }
+  if (subjects.some((s) => s.id === prev)) lk20SubjectSelect.value = prev;
+  renderLk20Topics();
+}
+
+function renderLk20Topics() {
+  lk20TopicSelect.innerHTML = "";
+  const subject = window.LK20.getSubject(lk20SubjectSelect.value);
+  if (!subject) return;
+  subject.topics.forEach((topic, i) => {
+    const opt = document.createElement("option");
+    opt.value = i;
+    opt.textContent = window.LK20.localizedTopic(topic);
+    lk20TopicSelect.appendChild(opt);
+  });
+}
+
+lk20LevelSelect.addEventListener("change", renderLk20Subjects);
+lk20SubjectSelect.addEventListener("change", renderLk20Topics);
+lk20UseBtn.addEventListener("click", () => {
+  const subject = window.LK20.getSubject(lk20SubjectSelect.value);
+  if (!subject) return;
+  const topic = subject.topics[Number(lk20TopicSelect.value)];
+  if (!topic) return;
+  aiTopicInput.value = `${window.LK20.localizedName(subject)}: ${window.LK20.localizedTopic(topic)}`;
+  aiContextInput.value = topic.descNb;
+  const level = lk20LevelSelect.value;
+  aiLevelSelect.value = level === "vgo" ? "vanskelig" : "middels";
+  aiTopicInput.scrollIntoView({ behavior: "smooth", block: "center" });
+});
+
 window.I18n.applyTranslations();
 window.I18n.mountSwitcher(document.getElementById("lang-switcher"));
 window.Theme.applyTheme();
 window.Coins.mountBadge(document.getElementById("coin-badge"));
+renderLk20Levels();
+renderLk20Subjects();
 document.addEventListener("localechange", () => {
   window.I18n.applyTranslations();
+  renderLk20Levels();
+  renderLk20Subjects();
   render();
 });
 render();

@@ -46,6 +46,13 @@ window.I18n = (function () {
       shopBuyBtn: "Kjøp",
       playShop: "🎨 Design-butikk",
 
+      lk20Heading: "📚 Vet du ikke helt hva du skal øve på?",
+      lk20Hint: "Velg trinn, fag og tema fra læreplanen (LK20) — hentet fra udir.no — så fyller vi inn feltene under for deg.",
+      lk20LevelLabel: "Trinn",
+      lk20SubjectLabel: "Fag",
+      lk20TopicLabel: "Tema fra læreplanen",
+      lk20UseBtn: "⬆️ Bruk dette temaet",
+
       playTrueFalse: "❓ Sant/Usant",
       addQuestionsFirstTrueFalse: "❓ Legg til spørsmål først",
       tfQuestionLabel: "Spørsmål",
@@ -212,6 +219,13 @@ window.I18n = (function () {
       shopTooExpensive: "Too expensive",
       shopBuyBtn: "Buy",
       playShop: "🎨 Design Shop",
+
+      lk20Heading: "📚 Not sure what to study?",
+      lk20Hint: "Pick a grade level, subject and topic from the Norwegian curriculum (LK20) — sourced from udir.no — and we'll fill in the fields below for you.",
+      lk20LevelLabel: "Grade level",
+      lk20SubjectLabel: "Subject",
+      lk20TopicLabel: "Curriculum topic",
+      lk20UseBtn: "⬆️ Use this topic",
 
       playTrueFalse: "❓ True/False",
       addQuestionsFirstTrueFalse: "❓ Add questions first",
