@@ -38,6 +38,12 @@ npx http-server .
    > holder API-nøkkelen skjult og kaller KI-en for deg — det er neste
    > steg om du ønsker det.
 
+   > **Vet du ikke helt hva du skal øve på?** Bruk 📚 LK20-velgeren
+   > over KI-skjemaet: velg trinn (ungdomsskole eller videregående
+   > studiespesialiserende), fag og tema fra læreplanen — hentet fra
+   > udir.no sine offisielle kjerneelementer — og trykk "Bruk dette
+   > temaet" for å fylle inn feltene automatisk.
+
 3. **Spill!** Velg en spillmodus på et tema:
    - **▶ Flappy Quiz** — hver gang du får poeng, dukker det opp et
      spørsmål fra temaet ditt. Svarer du feil, er det game over.
@@ -101,6 +107,7 @@ quizspill/
     ├── coins.js         Global myntøkonomi, tjent på tvers av modusene
     ├── theme.js         De 10 kjøpbare fargetemaene + hvilket som er aktivt
     ├── share.js         Koder/dekoder temaer til delbare lenker
+    ├── lk20.js          Kjerneelementer fra LK20 (kilde: udir.no), for temavelgeren
     ├── ai-helper.js     Bygger KI-prompt + tolker JSON-svar
     ├── main.js          Logikk for hjemmesiden
     ├── flappy.js        Spillmotor for Flappy Quiz
@@ -122,6 +129,8 @@ quizspill/
 - [x] Del tema via lenke eller fil
 - [x] Tastaturstøtte og skjermleser-vennlighet (aria-live, ikke bare farge)
 - [x] Flerspråksstøtte (norsk/engelsk), lett å utvide med flere språk
+- [x] LK20-temavelger (trinn → fag → tema fra ekte kjerneelementer, kilde udir.no)
+- [ ] Flere LK20-fag/utdanningslinjer (f.eks. yrkesfag, egne matematikkfag)
 - [ ] Eventuelt: egen server-funksjon for direkte KI-integrasjon
 
 ---
