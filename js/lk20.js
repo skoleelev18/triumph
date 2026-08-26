@@ -90,7 +90,7 @@ window.LK20 = (function () {
       topics: [
         { nb: "Undring og utforsking", en: "Wonder and exploration", descNb: "Reflektere over hvordan kunnskap om samfunn blir til gjennom aktiv kunnskapssøking." },
         { nb: "Samfunnskritisk tenking og sammenhenger", en: "Critical thinking and connections", descNb: "Forstå sammenhenger mellom geografiske, historiske og nåtidige forhold." },
-        { nb: "Demokratiforståing og deltaking", en: "Understanding democracy and participation", descNb: "Forstå forutsetninger for samarbeid, organisering og beslutninger i samfunnet." },
+        { nb: "Demokratiforståelse og deltakelse", en: "Understanding democracy and participation", descNb: "Forstå forutsetninger for samarbeid, organisering og beslutninger i samfunnet." },
         { nb: "Bærekraftige samfunn", en: "Sustainable societies", descNb: "Hvordan geografiske forhold rammer inn hvordan behov dekkes og ressurser fordeles." },
         { nb: "Identitetsutvikling og fellesskap", en: "Identity development and community", descNb: "Innsikt i hvordan mennesker utvikler identitet og tilhørighet gjennom samhandling." },
       ],
@@ -200,10 +200,10 @@ window.LK20 = (function () {
       programs: ["studiespesialiserende"],
       code: "POS04-01",
       topics: [
-        { nb: "Sosiale strukturer, aktørar og handling", en: "Social structures, actors and action", descNb: "Måtar å organisere fellesskap på i ulike samfunn og kulturar, og sosiale prosessar knytte til ulikskap og arbeid." },
-        { nb: "Vitskapleg metode og kjeldebruk", en: "Scientific method and use of sources", descNb: "Innsikt i samfunnsvitskapleg forsking, metodar, analyseverktøy og teoriar, med kritisk kjeldebruk." },
-        { nb: "Sosialisering og medborgarskap", en: "Socialisation and citizenship", descNb: "Tilhøyrsel i fellesskap og korleis vi blir påverka av samhandling gjennom livet." },
-        { nb: "Kulturforståing og interkulturell kompetanse", en: "Cultural understanding and intercultural competence", descNb: "Likskapar og skilnader innanfor og mellom kulturar, og urfolks- og minoritetsperspektiv." },
+        { nb: "Sosiale strukturer, aktører og handling", en: "Social structures, actors and action", descNb: "Måter å organisere fellesskap på i ulike samfunn og kulturer, og sosiale prosesser knyttet til ulikhet og arbeid." },
+        { nb: "Vitenskapelig metode og kildebruk", en: "Scientific method and use of sources", descNb: "Innsikt i samfunnsvitenskapelig forskning, metoder, analyseverktøy og teorier, med kritisk kildebruk." },
+        { nb: "Sosialisering og medborgerskap", en: "Socialisation and citizenship", descNb: "Tilhørighet i fellesskap og hvordan vi blir påvirket av samhandling gjennom livet." },
+        { nb: "Kulturforståelse og interkulturell kompetanse", en: "Cultural understanding and intercultural competence", descNb: "Likheter og forskjeller innenfor og mellom kulturer, og urfolks- og minoritetsperspektiv." },
       ],
     },
     {
