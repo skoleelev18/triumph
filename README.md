@@ -129,8 +129,9 @@ quizspill/
 - [x] Del tema via lenke eller fil
 - [x] Tastaturstøtte og skjermleser-vennlighet (aria-live, ikke bare farge)
 - [x] Flerspråksstøtte (norsk/engelsk), lett å utvide med flere språk
-- [x] LK20-temavelger (trinn → fag → tema fra ekte kjerneelementer, kilde udir.no)
-- [ ] Flere LK20-fag/utdanningslinjer (f.eks. yrkesfag, egne matematikkfag)
+- [x] LK20-temavelger: ungdomsskole + 17 studiespesialiserende programfag på
+      videregående, ekte kjerneelementer fra udir.no
+- [ ] Flere LK20-utdanningslinjer (f.eks. yrkesfag, egne matematikkfag på vgo)
 - [ ] Eventuelt: egen server-funksjon for direkte KI-integrasjon
 
 ---
