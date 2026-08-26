@@ -2,8 +2,9 @@
 
 Et lite nettbasert spill for å øve til prøver, eksamen og presentasjoner.
 Du lager egne "temaer" med spørsmål (manuelt, eller via en KI-hjelper), og
-øver på dem gjennom tre spillmoduser: Flappy Quiz, Quiz Blackjack og
-Flashcards. Tilgjengelig på norsk og engelsk.
+øver på dem gjennom fire spillmoduser: Flappy Quiz, Quiz Blackjack,
+Flashcards og Sant/Usant. Tilgjengelig på norsk og engelsk, med
+tastaturstøtte og skjermleser-vennlige spillmoduser.
 
 Ren HTML/CSS/JavaScript — ingen byggeverktøy, ingen backend. Alt lagres
 lokalt i nettleseren din (`localStorage`).
@@ -48,7 +49,16 @@ npx http-server .
    - **🗂️ Flashcards** — bla gjennom spørsmålene som kort. Trykk for å
      snu kortet og se svaret, og merk om du kunne det eller ikke. Kort
      du ikke kunne kan du øve på igjen etterpå.
-4. **Bytt språk** når som helst med språkvelgeren øverst på hver side —
+   - **❓ Sant/Usant** — 10 raske runder der du får et spørsmål og ett
+     svaralternativ (riktig eller feil), og svarer Sant/Usant.
+4. **Tjen mynter** 🪙 for hvert riktige svar i alle modusene, og bruk dem
+   i **🎨 Design-butikken** til å låse opp nye fargetemaer for hele
+   siden — fra gratis "Standard" til det legendariske toppnivået.
+5. **Se fremgangen din** på 📊 Fremgang-siden — hvilke spørsmål du
+   fortsatt bommer på, samlet på tvers av alle modusene.
+6. **Del et tema** med andre via "🔗 Del" (kopierer en lenke) eller
+   "📁 Importer fra fil".
+7. **Bytt språk** når som helst med språkvelgeren øverst på hver side —
    valget lagres og gjelder på alle sidene.
 
 ## Publisere til GitHub Pages
@@ -75,18 +85,30 @@ quizspill/
 ├── flappy.html         Flappy Quiz-spillmodus
 ├── blackjack.html      Quiz Blackjack-spillmodus
 ├── flashcards.html     Flashcards-spillmodus
-├── style.css           Delt styling (inkl. arkade-forside)
+├── truefalse.html      Sant/Usant-spillmodus
+├── shop.html           Design-butikk (kjøpbare fargetemaer)
+├── progress.html       Fremgang: treffsikkerhet per spørsmål
+├── style.css           Delt styling (inkl. arkade-forside og temaer)
 ├── flappy.css          Styling delt av alle spillmoduser (topbar, overlays)
 ├── blackjack.css       Styling spesifikk for Blackjack (bord, kort, sjetonger)
 ├── flashcards.css      Styling spesifikk for Flashcards (kortvending)
+├── truefalse.css       Styling spesifikk for Sant/Usant
+├── shop.css            Styling spesifikk for design-butikken
+├── progress.css        Styling spesifikk for fremgangssiden
 └── js/
     ├── i18n.js          Oversettelser (norsk/engelsk) + språkvelger
-    ├── storage.js       Lagring av temaer/spørsmål/chips i localStorage
+    ├── storage.js       Lagring av temaer/spørsmål/chips/statistikk
+    ├── coins.js         Global myntøkonomi, tjent på tvers av modusene
+    ├── theme.js         De 10 kjøpbare fargetemaene + hvilket som er aktivt
+    ├── share.js         Koder/dekoder temaer til delbare lenker
     ├── ai-helper.js     Bygger KI-prompt + tolker JSON-svar
     ├── main.js          Logikk for hjemmesiden
     ├── flappy.js        Spillmotor for Flappy Quiz
     ├── blackjack.js     Spillmotor for Quiz Blackjack
-    └── flashcards.js    Spillmotor for Flashcards
+    ├── flashcards.js    Spillmotor for Flashcards
+    ├── truefalse.js     Spillmotor for Sant/Usant
+    ├── shop.js          Logikk for design-butikken
+    └── progress.js      Logikk for fremgangssiden
 ```
 
 ## Veikart
@@ -94,6 +116,11 @@ quizspill/
 - [x] Flappy Quiz-modus med spørsmål ved hvert poeng
 - [x] Blackjack-modus: quiz avgjør startsjetonger, ny quiz når du går tom
 - [x] Flashcards-modus
+- [x] Sant/Usant-modus
+- [x] Fremgangsside som sporer riktig/feil per spørsmål på tvers av moduser
+- [x] Global myntøkonomi + design-butikk med 10 fargetemaer
+- [x] Del tema via lenke eller fil
+- [x] Tastaturstøtte og skjermleser-vennlighet (aria-live, ikke bare farge)
 - [x] Flerspråksstøtte (norsk/engelsk), lett å utvide med flere språk
 - [ ] Eventuelt: egen server-funksjon for direkte KI-integrasjon
 
