@@ -78,6 +78,27 @@
   <section class="card" id="ai-section">
     <h2 data-i18n="aiHeading"></h2>
     <p class="hint" data-i18n="aiHint"></p>
+
+    <div id="lk20-picker" class="lk20-picker">
+      <p class="lk20-heading" data-i18n="lk20Heading"></p>
+      <p class="hint" data-i18n="lk20Hint"></p>
+      <div class="options-grid">
+        <label>
+          <span data-i18n="lk20LevelLabel"></span>
+          <select id="lk20-level-select"></select>
+        </label>
+        <label>
+          <span data-i18n="lk20SubjectLabel"></span>
+          <select id="lk20-subject-select"></select>
+        </label>
+      </div>
+      <label>
+        <span data-i18n="lk20TopicLabel"></span>
+        <select id="lk20-topic-select"></select>
+      </label>
+      <button id="lk20-use-btn" type="button" class="secondary" data-i18n="lk20UseBtn"></button>
+    </div>
+
     <form id="ai-prompt-form">
       <label>
         <span data-i18n="aiTopicLabel"></span>
@@ -136,6 +157,7 @@
 <script src="js/storage.js"></script>
 <script src="js/coins.js"></script>
 <script src="js/theme.js"></script>
+<script src="js/lk20.js"></script>
 <script src="js/ai-helper.js"></script>
 <script src="js/share.js"></script>
 <script src="js/main.js"></script>

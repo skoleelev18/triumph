@@ -158,6 +158,21 @@ main {
   font-size: 0.92rem;
 }
 
+.lk20-picker {
+  border: 1px dashed var(--border);
+  border-radius: 10px;
+  padding: 1rem;
+  margin-bottom: 1.2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.7rem;
+}
+
+.lk20-heading {
+  margin: 0;
+  font-weight: 700;
+}
+
 form {
   display: flex;
   flex-direction: column;
