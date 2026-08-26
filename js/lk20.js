@@ -3,6 +3,14 @@
 // gjengivelse av læreplanen — bare kjerneelementene (hovedtemaene) for et
 // utvalg vanlige fag, ment som raske utgangspunkt for KI-prompten.
 // Kilde: udir.no/lk20/<fagkode>/om-faget/kjerneelementer
+//
+// Utvidbarhet: "vgo"-fagene har et `programs`-felt (f.eks.
+// "studiespesialiserende"). I dag viser vi bare studiespesialiserende
+// programfag på videregående, men for å legge til en ny utdanningslinje
+// (f.eks. yrkesfag) eller egne matematikkfag (1P/1T/R1/R2 osv.) senere:
+// 1) legg til nye fag-objekter i SUBJECTS med riktig `programs`-verdi,
+// 2) bygg ev. en programvelger i UI-et som filtrerer på `programs` i
+//    tillegg til `levels`, slik getSubjectsForLevel gjør i dag.
 
 window.LK20 = (function () {
   const LEVELS = [
@@ -16,6 +24,7 @@ window.LK20 = (function () {
       nameNb: "Norsk",
       nameEn: "Norwegian",
       levels: ["ungdomsskole", "vgo"],
+      programs: ["studiespesialiserende"],
       code: "NOR01-06",
       topics: [
         { nb: "Tekst i kontekst", en: "Text in context", descNb: "Lese tekster for å oppleve, bli engasjert, undre seg, lære og få innsikt i andre menneskers tanker og livsbetingelser." },
@@ -30,7 +39,10 @@ window.LK20 = (function () {
       id: "matematikk",
       nameNb: "Matematikk",
       nameEn: "Mathematics",
-      levels: ["ungdomsskole", "vgo"],
+      // NB: MAT01-05 gjelder kun 1.-10. trinn, ikke videregående (der er
+      // matematikk delt i egne fag som 1P/1T/R1/R2/S1/S2 osv.). Legg ev.
+      // til disse som egne fag-objekter med programs-felt senere.
+      levels: ["ungdomsskole"],
       code: "MAT01-05",
       topics: [
         { nb: "Utforsking og problemløsning", en: "Exploration and problem solving", descNb: "Utforske mønster og løse problemer systematisk, med vekt på strategier og framgangsmåter." },
@@ -46,6 +58,7 @@ window.LK20 = (function () {
       nameNb: "Naturfag",
       nameEn: "Natural science",
       levels: ["ungdomsskole", "vgo"],
+      programs: ["studiespesialiserende"],
       code: "NAT01-04",
       topics: [
         { nb: "Naturvitenskapelige praksiser og tenkemåter", en: "Scientific practices and ways of thinking", descNb: "Oppleve naturfag som et praktisk og utforskende fag gjennom eksperimentering og modellering." },
@@ -60,6 +73,7 @@ window.LK20 = (function () {
       nameNb: "Engelsk",
       nameEn: "English",
       levels: ["ungdomsskole", "vgo"],
+      programs: ["studiespesialiserende"],
       code: "ENG01-04",
       topics: [
         { nb: "Kommunikasjon", en: "Communication", descNb: "Skape mening med språk og bruke det i formelle og uformelle sammenhenger." },
@@ -86,6 +100,7 @@ window.LK20 = (function () {
       nameNb: "Samfunnskunnskap",
       nameEn: "Civics",
       levels: ["vgo"],
+      programs: ["studiespesialiserende"],
       code: "SAK01-01",
       topics: [
         { nb: "Undring og utforsking", en: "Wonder and exploration", descNb: "Reflektere over og vurdere kritisk hvordan kunnskap om samfunnet blir til." },
@@ -113,12 +128,95 @@ window.LK20 = (function () {
       nameNb: "Historie",
       nameEn: "History",
       levels: ["vgo"],
+      programs: ["studiespesialiserende"],
       code: "HIS01-03",
       topics: [
         { nb: "Historiebevissthet", en: "Historical awareness", descNb: "Forstå seg selv som historieskapt og historieskapende, med en fortid, nåtid og framtid." },
         { nb: "Utforskende historie og kildekritikk", en: "Exploratory history and source criticism", descNb: "Undersøke fortiden kritisk og vurdere hvordan historisk kunnskap blir til." },
         { nb: "Historisk empati og perspektiver", en: "Historical empathy and perspectives", descNb: "Forstå menneskers handlinger i fortiden som resultat av datidens valg og vilkår." },
         { nb: "Mennesker og samfunn i fortid, nåtid og framtid", en: "People and society past, present and future", descNb: "Innsikt i viktige temaer og perioder i norsk og internasjonal historie." },
+      ],
+    },
+    {
+      id: "biologi",
+      nameNb: "Biologi",
+      nameEn: "Biology",
+      levels: ["vgo"],
+      programs: ["studiespesialiserende"],
+      code: "BIO01-02",
+      topics: [
+        { nb: "Praksiser og tenkemåter i biologi", en: "Practices and ways of thinking in biology", descNb: "Hvordan naturvitenskapelige hypoteser, teorier, metoder og modeller utvikles og brukes i faget." },
+        { nb: "Biologiske system", en: "Biological systems", descNb: "Oppbygging av celler, vev og organ og samspillet mellom dem, og økosystemene organismene lever i." },
+        { nb: "Biologiske prosesser", en: "Biological processes", descNb: "Prosesser i og mellom celler, genetikk og fysiologi hos organismer, samt evolusjonære prosesser." },
+        { nb: "Biologi i samfunnet", en: "Biology in society", descNb: "Hvordan biologisk kompetanse kan brukes til å forvalte naturen bærekraftig, og etiske spørsmål rundt bruk av biologisk kunnskap." },
+      ],
+    },
+    {
+      id: "kjemi",
+      nameNb: "Kjemi",
+      nameEn: "Chemistry",
+      levels: ["vgo"],
+      programs: ["studiespesialiserende"],
+      code: "KJE01-02",
+      topics: [
+        { nb: "Praksiser og tenkemåter i kjemi", en: "Practices and ways of thinking in chemistry", descNb: "Hvordan naturvitenskapelige hypoteser, teorier, metoder og modeller i kjemi utvikles og brukes, koblet til eksperimentelt og utforskende arbeid." },
+        { nb: "Kjemiske bindinger og strukturer", en: "Chemical bonds and structures", descNb: "Krefter mellom partikler og betydningen for sammensetning og egenskaper til stoffer." },
+        { nb: "Kjemiske reaksjoner", en: "Chemical reactions", descNb: "Hvordan og hvorfor stoffer reagerer, inkludert reaksjonstyper, termodynamikk og reaksjonsfart." },
+        { nb: "Anvendt kjemi", en: "Applied chemistry", descNb: "Bruke kjemikompetanse til å forstå hvordan kjemiske stoffer og prosesser påvirker mennesker og samfunn." },
+      ],
+    },
+    {
+      id: "fysikk",
+      nameNb: "Fysikk",
+      nameEn: "Physics",
+      levels: ["vgo"],
+      programs: ["studiespesialiserende"],
+      code: "FYS01-02",
+      topics: [
+        { nb: "Praksiser og tenkemåter i fysikk", en: "Practices and ways of thinking in physics", descNb: "Hvordan naturvitenskapelige metoder, eksperimenter, teorier og modeller utvikles, inkludert bruk av programmering." },
+        { nb: "Energi og energioverføring", en: "Energy and energy transfer", descNb: "Energi involvert i alle fysiske prosesser, ulike energiformer og energioverføring mellom objekter." },
+        { nb: "Krefter og felt", en: "Forces and fields", descNb: "Vekselvirkning mellom objekter, kraftanalyse for beregning av bevegelse, og feltbegrepet for fjernkrefter." },
+        { nb: "Materie, tid og rom", en: "Matter, time and space", descNb: "Byggesteinene i naturen og de teoretiske modellene som beskriver universets oppbygning." },
+      ],
+    },
+    {
+      id: "psykologi",
+      nameNb: "Psykologi",
+      nameEn: "Psychology",
+      levels: ["vgo"],
+      programs: ["studiespesialiserende"],
+      code: "PSY01-04",
+      topics: [
+        { nb: "Tanker, emosjoner og atferd", en: "Thoughts, emotions and behaviour", descNb: "Psykologiske prosesser og menneskelig atferd, og hvordan tanker, emosjoner og atferd påvirkes av individuelle, situasjonelle og sosiale faktorer." },
+        { nb: "Menneskelig utvikling og samspill", en: "Human development and interaction", descNb: "Hvordan arv, miljø og psykologiske prosesser påvirker menneskelig utvikling i et livsløpsperspektiv." },
+        { nb: "Vitenskapelig og kritisk tenkning", en: "Scientific and critical thinking", descNb: "Vurdere holdbarheten i psykologiske påstander og koble psykologiske tema til forskningsmetode." },
+      ],
+    },
+    {
+      id: "sosiologi",
+      nameNb: "Sosiologi og sosialantropologi",
+      nameEn: "Sociology and social anthropology",
+      levels: ["vgo"],
+      programs: ["studiespesialiserende"],
+      code: "POS04-01",
+      topics: [
+        { nb: "Sosiale strukturer, aktørar og handling", en: "Social structures, actors and action", descNb: "Måtar å organisere fellesskap på i ulike samfunn og kulturar, og sosiale prosessar knytte til ulikskap og arbeid." },
+        { nb: "Vitskapleg metode og kjeldebruk", en: "Scientific method and use of sources", descNb: "Innsikt i samfunnsvitskapleg forsking, metodar, analyseverktøy og teoriar, med kritisk kjeldebruk." },
+        { nb: "Sosialisering og medborgarskap", en: "Socialisation and citizenship", descNb: "Tilhøyrsel i fellesskap og korleis vi blir påverka av samhandling gjennom livet." },
+        { nb: "Kulturforståing og interkulturell kompetanse", en: "Cultural understanding and intercultural competence", descNb: "Likskapar og skilnader innanfor og mellom kulturar, og urfolks- og minoritetsperspektiv." },
+      ],
+    },
+    {
+      id: "samfunnsokonomi",
+      nameNb: "Samfunnsøkonomi",
+      nameEn: "Economics",
+      levels: ["vgo"],
+      programs: ["studiespesialiserende"],
+      code: "SOK01-04",
+      topics: [
+        { nb: "Ressursbruk og fordeling", en: "Resource use and distribution", descNb: "Hvordan samfunn bruker arbeidskraft, realkapital og naturressurser til å produsere varer og tjenester, og fordelingen av verdiskapingen." },
+        { nb: "Samfunnsøkonomisk metode og analyse", en: "Economic method and analysis", descNb: "Økonomiske årsakssammenhenger og bruk av teori og grafiske modeller knyttet til økonomisk virkelighet." },
+        { nb: "Makroøkonomi og økonomisk politikk", en: "Macroeconomics and economic policy", descNb: "Hvordan nasjonale og internasjonale forhold påvirker økonomier, og hvilke virkemidler myndighetene bruker." },
       ],
     },
   ];
