@@ -47,12 +47,14 @@ const t = window.I18n.t;
 
 window.I18n.applyTranslations();
 window.I18n.mountSwitcher(document.getElementById("lang-switcher"));
+window.Theme.applyTheme();
 document.addEventListener("localechange", () => window.I18n.applyTranslations());
 
 if (!deck || !deck.questions || deck.questions.length === 0) {
   overlayEmpty.classList.remove("hidden");
   panelBetting.classList.add("hidden");
 } else {
+  window.Coins.mountBadge(document.getElementById("coin-badge"));
   deckTitleEl.textContent = deck.name;
   initGame();
 }
@@ -361,6 +363,7 @@ function initGame() {
       if (isCorrect) {
         correct++;
         addChips(deck.id, CHIP_REWARD);
+        window.Coins.awardForCorrectAnswer();
         renderChipsDisplay();
         btn.classList.add("correct");
         questionFeedback.textContent = t("answerCorrectChips", { reward: CHIP_REWARD });

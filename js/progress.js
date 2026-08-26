@@ -17,6 +17,7 @@ const resetBtn = document.getElementById("reset-stats-btn");
 
 window.I18n.applyTranslations();
 window.I18n.mountSwitcher(document.getElementById("lang-switcher"));
+window.Theme.applyTheme();
 document.addEventListener("localechange", () => {
   window.I18n.applyTranslations();
   render();

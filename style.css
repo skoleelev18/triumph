@@ -47,6 +47,22 @@ body {
   right: 1rem;
 }
 
+.header-controls {
+  position: absolute;
+  top: 1rem;
+  left: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.header-controls a {
+  text-decoration: none;
+  font-size: 0.8rem;
+  padding: 0.4rem 0.7rem;
+}
+
 .lang-select {
   font-family: inherit;
   font-size: 0.85rem;
@@ -370,4 +386,147 @@ button.danger:hover {
   font-size: 0.65rem;
   letter-spacing: 0.02em;
   color: var(--primary);
+}
+
+.coin-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  background: #1c2333;
+  color: #ffe38a;
+  padding: 0.35rem 0.75rem;
+  border-radius: 999px;
+  font-weight: 800;
+  font-size: 0.85rem;
+  box-shadow: inset 0 0 0 2px rgba(255, 227, 138, 0.35);
+}
+
+.coin-badge-icon {
+  font-size: 0.95rem;
+}
+
+/* ---- Kjøpbare fargetemaer ---- */
+
+:root[data-theme="ocean"] {
+  --primary: #0891b2;
+  --primary-dark: #0e7490;
+  --accent: #22d3ee;
+  --gold: #38bdf8;
+  --bg: #eafcff;
+  --border: #bae6fd;
+}
+
+:root[data-theme="forest"] {
+  --primary: #15803d;
+  --primary-dark: #166534;
+  --accent: #84cc16;
+  --gold: #a3e635;
+  --bg: #f0fdf4;
+  --border: #bbf7d0;
+}
+
+:root[data-theme="sunset"] {
+  --primary: #ea580c;
+  --primary-dark: #c2410c;
+  --accent: #f43f5e;
+  --gold: #fb923c;
+  --bg: #fff7ed;
+  --border: #fed7aa;
+}
+
+:root[data-theme="grape"] {
+  --primary: #7c3aed;
+  --primary-dark: #6d28d9;
+  --accent: #d946ef;
+  --gold: #e879f9;
+  --bg: #faf5ff;
+  --border: #e9d5ff;
+}
+
+:root[data-theme="dark"] {
+  --bg: #0f1220;
+  --card-bg: #1a1e33;
+  --text: #e8eaf6;
+  --muted: #9aa0c3;
+  --primary: #6366f1;
+  --primary-dark: #4f46e5;
+  --accent: #34d399;
+  --gold: #fbbf24;
+  --border: #2b3050;
+}
+
+:root[data-theme="retro"] {
+  --bg: #0a0a0a;
+  --card-bg: #161616;
+  --text: #f5b83d;
+  --muted: #b98a2e;
+  --primary: #f59e0b;
+  --primary-dark: #b45309;
+  --accent: #f5b83d;
+  --gold: #ffcc66;
+  --border: #3a2e12;
+}
+
+:root[data-theme="neon"] {
+  --bg: #0b0014;
+  --card-bg: #16021f;
+  --text: #f5f3ff;
+  --muted: #c9a9ff;
+  --primary: #ff2fd0;
+  --primary-dark: #c2189f;
+  --accent: #00f0ff;
+  --gold: #00f0ff;
+  --border: #3a0a4a;
+}
+
+:root[data-theme="gold"] {
+  --bg: #0d0d0d;
+  --card-bg: #1a1a1a;
+  --text: #f5e7c1;
+  --muted: #c9b37a;
+  --primary: #caa53d;
+  --primary-dark: #a3812a;
+  --accent: #e8c766;
+  --gold: #f0d98c;
+  --border: #3a2f14;
+}
+
+:root[data-theme="legendary"] {
+  --primary: #7c3aed;
+  --primary-dark: #6d28d9;
+  --accent: #22d3ee;
+  --gold: #ff5f6d;
+  --bg: #f7f5ff;
+  --border: #e4d9ff;
+}
+
+:root[data-theme="legendary"] .card,
+:root[data-theme="legendary"] .bj-panel,
+:root[data-theme="legendary"] .deck-card,
+:root[data-theme="legendary"] .shop-card {
+  border: 3px solid transparent;
+  background-image: linear-gradient(var(--card-bg), var(--card-bg)),
+    linear-gradient(90deg, #ff5f6d, #7c3aed, #22d3ee, #ff5f6d);
+  background-origin: border-box;
+  background-clip: padding-box, border-box;
+  background-size: 100% 100%, 300% 100%;
+  animation: legendary-border 6s linear infinite;
+}
+
+@keyframes legendary-border {
+  to {
+    background-position: 0 0, -300% 0;
+  }
+}
+
+:root[data-theme="legendary"] .site-header {
+  background: linear-gradient(270deg, #ff5f6d, #7c3aed, #22d3ee, #ff5f6d);
+  background-size: 400% 400%;
+  animation: legendary-bg 10s ease infinite;
+}
+
+@keyframes legendary-bg {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
 }

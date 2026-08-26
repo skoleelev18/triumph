@@ -1,0 +1,75 @@
+.shop-wrap {
+  width: 100%;
+  max-width: 720px;
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+  padding-bottom: 2rem;
+}
+
+.shop-hint {
+  text-align: center;
+  color: var(--muted);
+  font-size: 0.9rem;
+  margin: 0;
+}
+
+.shop-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 1rem;
+}
+
+.shop-card {
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: 1.2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.7rem;
+  text-align: center;
+}
+
+.shop-card.active {
+  box-shadow: 0 0 0 3px var(--gold), var(--shadow);
+}
+
+.shop-swatch {
+  width: 100%;
+  height: 56px;
+  border-radius: 10px;
+  box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.08);
+}
+
+.shop-card-name {
+  font-weight: 800;
+  font-size: 1rem;
+  margin: 0;
+}
+
+.shop-card-price {
+  font-weight: 700;
+  color: var(--muted);
+  margin: 0;
+  font-size: 0.9rem;
+}
+
+.shop-card button {
+  width: 100%;
+}
+
+.shop-card button.owned-active {
+  background: var(--accent);
+  box-shadow: 0 4px 0 #15803d;
+  cursor: default;
+}
+
+.shop-card button.locked {
+  background: #cbd0dc;
+  color: #6b7080;
+  box-shadow: 0 4px 0 #a6acbc;
+  cursor: not-allowed;
+}

@@ -26,12 +26,14 @@ const restartBtn = document.getElementById("fc-restart-btn");
 
 window.I18n.applyTranslations();
 window.I18n.mountSwitcher(document.getElementById("lang-switcher"));
+window.Theme.applyTheme();
 document.addEventListener("localechange", () => window.I18n.applyTranslations());
 
 if (!deck || !deck.questions || deck.questions.length === 0) {
   overlayEmpty.classList.remove("hidden");
   gameEl.classList.add("hidden");
 } else {
+  window.Coins.mountBadge(document.getElementById("coin-badge"));
   deckTitleEl.textContent = deck.name;
   initGame();
 }
@@ -85,6 +87,7 @@ function initGame() {
     window.Storage.recordAnswer(deck.id, queue[index].id, knew);
     if (knew) {
       knownCount++;
+      window.Coins.awardForCorrectAnswer();
     } else {
       unknownCards.push(queue[index]);
     }
