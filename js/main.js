@@ -1,10 +1,12 @@
 const {
   getDecks,
+  getDeck,
   createDeck,
   deleteDeck,
   addQuestion,
   deleteQuestion,
   importQuestions,
+  importDeck,
   exportDeck,
 } = window.Storage;
 const { buildPrompt, parseAIResponse } = window.AIHelper;
@@ -12,6 +14,9 @@ const { buildPrompt, parseAIResponse } = window.AIHelper;
 const deckListEl = document.getElementById("deck-list");
 const newDeckForm = document.getElementById("new-deck-form");
 const newDeckNameInput = document.getElementById("new-deck-name");
+const importFileBtn = document.getElementById("import-file-btn");
+const importFileInput = document.getElementById("import-file-input");
+const deckImportStatus = document.getElementById("deck-import-status");
 const manualDeckSelect = document.getElementById("manual-deck-select");
 const manualQuestionForm = document.getElementById("manual-question-form");
 const aiPromptForm = document.getElementById("ai-prompt-form");
@@ -131,6 +136,11 @@ function renderDeckList(decks) {
     exportBtn.textContent = t("exportBtn");
     exportBtn.addEventListener("click", () => downloadDeck(deck.id));
 
+    const shareBtn = document.createElement("button");
+    shareBtn.className = "secondary";
+    shareBtn.textContent = t("shareBtn");
+    shareBtn.addEventListener("click", () => shareDeck(deck, shareBtn));
+
     const deleteBtn = document.createElement("button");
     deleteBtn.className = "danger";
     deleteBtn.textContent = t("deleteDeckBtn");
@@ -141,7 +151,7 @@ function renderDeckList(decks) {
       }
     });
 
-    actions.append(playLink, blackjackLink, flashcardsLink, progressLink, toggleBtn, exportBtn, deleteBtn);
+    actions.append(playLink, blackjackLink, flashcardsLink, progressLink, toggleBtn, exportBtn, shareBtn, deleteBtn);
     card.append(info, actions);
     deckListEl.appendChild(card);
 
@@ -186,6 +196,21 @@ function downloadDeck(deckId) {
   a.download = `${(deck?.name || "tema").replace(/\s+/g, "_")}.json`;
   a.click();
   URL.revokeObjectURL(url);
+}
+
+async function shareDeck(deck, btn) {
+  const url = window.Share.buildShareUrl(deck);
+  const originalText = btn.textContent;
+  try {
+    await navigator.clipboard.writeText(url);
+    btn.textContent = t("shareLinkCopied");
+  } catch {
+    prompt(t("shareLinkFallbackPrompt"), url);
+  }
+  if (url.length > 4000) {
+    alert(t("shareLinkTooLong"));
+  }
+  setTimeout(() => (btn.textContent = originalText), 1800);
 }
 
 function escapeHtml(str) {
@@ -268,6 +293,55 @@ importQuestionsBtn.addEventListener("click", () => {
   }
 });
 
+importFileBtn.addEventListener("click", () => importFileInput.click());
+
+importFileInput.addEventListener("change", () => {
+  const file = importFileInput.files[0];
+  importFileInput.value = "";
+  if (!file) return;
+  const reader = new FileReader();
+  reader.onload = () => {
+    deckImportStatus.className = "";
+    deckImportStatus.textContent = "";
+    try {
+      const data = JSON.parse(reader.result);
+      const result = importDeck(data);
+      if (!result) throw new Error(t("importFileError"));
+      deckImportStatus.textContent = t("importSuccess", { name: result.deck.name });
+      deckImportStatus.className = "success";
+      render();
+    } catch {
+      deckImportStatus.textContent = t("importFileError");
+      deckImportStatus.className = "error";
+    }
+  };
+  reader.readAsText(file);
+});
+
+function importFromUrl() {
+  const params = new URLSearchParams(location.search);
+  const encoded = params.get("import");
+  if (!encoded) return;
+
+  history.replaceState(null, "", location.pathname);
+
+  try {
+    const data = window.Share.decodeDeck(encoded);
+    if (!data || typeof data.name !== "string" || !Array.isArray(data.questions)) {
+      throw new Error("invalid");
+    }
+    if (confirm(t("importConfirm", { name: data.name, count: data.questions.length }))) {
+      const result = importDeck(data);
+      deckImportStatus.textContent = t("importSuccess", { name: result.deck.name });
+      deckImportStatus.className = "success";
+      render();
+    }
+  } catch {
+    deckImportStatus.textContent = t("importLinkError");
+    deckImportStatus.className = "error";
+  }
+}
+
 window.I18n.applyTranslations();
 window.I18n.mountSwitcher(document.getElementById("lang-switcher"));
 document.addEventListener("localechange", () => {
@@ -275,3 +349,4 @@ document.addEventListener("localechange", () => {
   render();
 });
 render();
+importFromUrl();

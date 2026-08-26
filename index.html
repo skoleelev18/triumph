@@ -25,6 +25,10 @@
       <input type="text" id="new-deck-name" data-i18n-placeholder="newDeckPlaceholder" required />
       <button type="submit" data-i18n="newDeckBtn"></button>
     </form>
+
+    <button id="import-file-btn" type="button" class="secondary" data-i18n="importFromFileBtn"></button>
+    <input type="file" id="import-file-input" accept="application/json" class="hidden" />
+    <p id="deck-import-status"></p>
   </section>
 
   <section class="card" id="manual-section">
@@ -127,6 +131,7 @@
 <script src="js/i18n.js"></script>
 <script src="js/storage.js"></script>
 <script src="js/ai-helper.js"></script>
+<script src="js/share.js"></script>
 <script src="js/main.js"></script>
 </body>
 </html>

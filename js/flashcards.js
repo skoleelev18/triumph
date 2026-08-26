@@ -112,6 +112,12 @@ function initGame() {
     if (flipControls.classList.contains("hidden")) return;
     flip();
   });
+  flipCard.addEventListener("keydown", (e) => {
+    if (e.key !== "Enter" && e.key !== " ") return;
+    e.preventDefault();
+    if (flipControls.classList.contains("hidden")) return;
+    flip();
+  });
   flipBtn.addEventListener("click", flip);
   knownBtn.addEventListener("click", () => rate(true));
   unknownBtn.addEventListener("click", () => rate(false));

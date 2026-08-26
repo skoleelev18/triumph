@@ -20,7 +20,7 @@
 </div>
 
 <div class="game-wrap">
-  <canvas id="game-canvas" width="480" height="640"></canvas>
+  <canvas id="game-canvas" width="480" height="640" role="img" aria-label="Flappy Quiz spillbrett"></canvas>
 
   <div id="overlay-start" class="overlay">
     <h2 data-i18n="flappyTitle"></h2>
@@ -30,14 +30,14 @@
   </div>
 
   <div id="overlay-question" class="overlay hidden">
-    <h3 id="question-text"></h3>
+    <h3 id="question-text" aria-live="polite"></h3>
     <div id="question-options" class="question-options"></div>
-    <p id="question-feedback" class="question-feedback"></p>
+    <p id="question-feedback" class="question-feedback" aria-live="polite"></p>
   </div>
 
   <div id="overlay-gameover" class="overlay hidden">
     <h2 data-i18n="gameOverTitle"></h2>
-    <p id="gameover-summary"></p>
+    <p id="gameover-summary" aria-live="polite"></p>
     <button id="restart-btn" data-i18n="playAgainBtn"></button>
     <a href="index.html" class="secondary back-link" data-i18n="backToDecks"></a>
   </div>
