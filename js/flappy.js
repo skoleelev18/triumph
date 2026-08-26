@@ -27,12 +27,14 @@ const t = window.I18n.t;
 
 window.I18n.applyTranslations();
 window.I18n.mountSwitcher(document.getElementById("lang-switcher"));
+window.Theme.applyTheme();
 document.addEventListener("localechange", () => window.I18n.applyTranslations());
 
 if (!deck || !deck.questions || deck.questions.length === 0) {
   overlayEmpty.classList.remove("hidden");
   overlayStart.classList.add("hidden");
 } else {
+  window.Coins.mountBadge(document.getElementById("coin-badge"));
   deckTitleEl.textContent = deck.name;
   highscoreDisplay.textContent = deck.highScore || 0;
   initGame();
@@ -132,6 +134,7 @@ function initGame() {
     window.Storage.recordAnswer(deck.id, q.id, isCorrect);
 
     if (isCorrect) {
+      window.Coins.awardForCorrectAnswer();
       btn.classList.add("correct");
       questionFeedback.textContent = t("answerCorrectContinuing");
       questionFeedback.style.color = "#4ade80";

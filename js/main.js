@@ -85,6 +85,7 @@ function renderDeckList(decks) {
     const playLink = document.createElement("a");
     const blackjackLink = document.createElement("a");
     const flashcardsLink = document.createElement("a");
+    const trueFalseLink = document.createElement("a");
     const progressLink = document.createElement("a");
     if (deck.questions.length > 0) {
       playLink.href = `flappy.html?deck=${encodeURIComponent(deck.id)}`;
@@ -93,6 +94,8 @@ function renderDeckList(decks) {
       blackjackLink.textContent = t("playBlackjack");
       flashcardsLink.href = `flashcards.html?deck=${encodeURIComponent(deck.id)}`;
       flashcardsLink.textContent = t("playFlashcards");
+      trueFalseLink.href = `truefalse.html?deck=${encodeURIComponent(deck.id)}`;
+      trueFalseLink.textContent = t("playTrueFalse");
       progressLink.href = `progress.html?deck=${encodeURIComponent(deck.id)}`;
       progressLink.textContent = t("playProgress");
     } else {
@@ -108,12 +111,16 @@ function renderDeckList(decks) {
       flashcardsLink.textContent = t("addQuestionsFirstFlashcards");
       flashcardsLink.style.pointerEvents = "none";
       flashcardsLink.style.opacity = "0.5";
+      trueFalseLink.href = "#";
+      trueFalseLink.textContent = t("addQuestionsFirstTrueFalse");
+      trueFalseLink.style.pointerEvents = "none";
+      trueFalseLink.style.opacity = "0.5";
       progressLink.href = "#";
       progressLink.textContent = t("addQuestionsFirstProgress");
       progressLink.style.pointerEvents = "none";
       progressLink.style.opacity = "0.5";
     }
-    for (const link of [playLink, blackjackLink, flashcardsLink, progressLink]) {
+    for (const link of [playLink, blackjackLink, flashcardsLink, trueFalseLink, progressLink]) {
       link.className = "secondary";
       Object.assign(link.style, {
         display: "inline-block",
@@ -151,7 +158,7 @@ function renderDeckList(decks) {
       }
     });
 
-    actions.append(playLink, blackjackLink, flashcardsLink, progressLink, toggleBtn, exportBtn, shareBtn, deleteBtn);
+    actions.append(playLink, blackjackLink, flashcardsLink, trueFalseLink, progressLink, toggleBtn, exportBtn, shareBtn, deleteBtn);
     card.append(info, actions);
     deckListEl.appendChild(card);
 
@@ -344,6 +351,8 @@ function importFromUrl() {
 
 window.I18n.applyTranslations();
 window.I18n.mountSwitcher(document.getElementById("lang-switcher"));
+window.Theme.applyTheme();
+window.Coins.mountBadge(document.getElementById("coin-badge"));
 document.addEventListener("localechange", () => {
   window.I18n.applyTranslations();
   render();

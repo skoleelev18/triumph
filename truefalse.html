@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Sant eller Usant — Triumph</title>
+<link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="style.css" />
+<link rel="stylesheet" href="flappy.css" />
+<link rel="stylesheet" href="truefalse.css" />
+</head>
+<body class="game-body">
+<div class="game-topbar">
+  <a href="index.html" class="secondary back-link" data-i18n="backLink"></a>
+  <div id="deck-title" class="deck-title"></div>
+  <div class="score-line">
+    <span id="tf-progress-label"></span>
+  </div>
+  <div id="coin-badge"></div>
+  <div id="lang-switcher"></div>
+</div>
+
+<div class="tf-wrap">
+  <div id="overlay-empty" class="overlay hidden" style="position: static; background: none; color: var(--text);">
+    <h2 data-i18n="emptyDeckTitle" style="color: var(--text); text-shadow: none;"></h2>
+    <p data-i18n="emptyDeckText"></p>
+    <a href="index.html" class="secondary back-link" data-i18n="toHomepage"></a>
+  </div>
+
+  <div id="tf-game">
+    <div class="tf-card">
+      <p class="tf-eyebrow" data-i18n="tfQuestionLabel"></p>
+      <p id="tf-question" class="tf-text" aria-live="polite"></p>
+      <p class="tf-eyebrow" data-i18n="tfStatementLabel"></p>
+      <p id="tf-statement" class="tf-statement" aria-live="polite"></p>
+      <p id="tf-feedback" class="tf-feedback" aria-live="polite"></p>
+    </div>
+
+    <div id="tf-answer-controls" class="tf-controls">
+      <button id="tf-false-btn" class="round-btn round-btn-stand" data-i18n="tfFalseBtn"></button>
+      <button id="tf-true-btn" class="round-btn round-btn-hit" data-i18n="tfTrueBtn"></button>
+    </div>
+
+    <button id="tf-next-btn" class="hidden" data-i18n="nextQuestionBtn"></button>
+  </div>
+
+  <div id="tf-summary" class="bj-panel hidden">
+    <h2 data-i18n="tfSummaryTitle"></h2>
+    <p id="tf-summary-text"></p>
+    <button id="tf-restart-btn" class="secondary" data-i18n="fcRestartBtn"></button>
+    <a href="index.html" class="secondary back-link" data-i18n="backToDecks"></a>
+  </div>
+</div>
+
+<div class="watermark">by skoleelev18</div>
+
+<script src="js/i18n.js"></script>
+<script src="js/storage.js"></script>
+<script src="js/coins.js"></script>
+<script src="js/theme.js"></script>
+<script src="js/truefalse.js"></script>
+</body>
+</html>
