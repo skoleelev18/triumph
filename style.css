@@ -158,19 +158,113 @@ main {
   font-size: 0.92rem;
 }
 
-.lk20-picker {
+.ocr-controls {
+  display: flex;
+  gap: 0.6rem;
+}
+
+.ocr-status {
+  margin: 0;
+  font-weight: 600;
+  color: var(--muted);
+}
+
+.ocr-status.error {
+  color: var(--danger);
+}
+
+/* ---- Faner (tabs) ---- */
+
+.tab-bar {
+  display: flex;
+  gap: 0.4rem;
+  border-bottom: 2px solid var(--border);
+  margin-bottom: 1.2rem;
+  flex-wrap: wrap;
+}
+
+.tab-bar .tab-btn {
+  background: transparent;
+  color: var(--muted);
+  box-shadow: none;
+  border-radius: 8px 8px 0 0;
+  padding: 0.6rem 1rem;
+  margin-bottom: -2px;
+  border-bottom: 2px solid transparent;
+}
+
+.tab-bar .tab-btn:hover {
+  background: var(--bg);
+  transform: none;
+}
+
+.tab-bar .tab-btn.active {
+  color: var(--primary);
+  border-bottom: 2px solid var(--primary);
+  box-shadow: none;
+}
+
+.tab-bar.small {
+  margin-bottom: 0.9rem;
+}
+
+.tab-bar.small .tab-btn {
+  font-size: 0.85rem;
+  padding: 0.4rem 0.8rem;
+}
+
+/* ---- "Finn et tema"-boks (LK20 / OCR) ---- */
+
+.findtopic-widget {
   border: 1px dashed var(--border);
   border-radius: 10px;
   padding: 1rem;
   margin-bottom: 1.2rem;
   display: flex;
   flex-direction: column;
-  gap: 0.7rem;
+  gap: 0.5rem;
 }
 
-.lk20-heading {
-  margin: 0;
+.findtopic-heading {
+  margin: 0 0 0.3rem;
   font-weight: 700;
+}
+
+/* ---- Kontakt support (collapsible) ---- */
+
+#contact-details summary {
+  cursor: pointer;
+  font-weight: 700;
+  font-size: 1.1rem;
+  padding: 1rem 1.5rem;
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  list-style: none;
+}
+
+#contact-details summary::-webkit-details-marker {
+  display: none;
+}
+
+#contact-details summary::before {
+  content: "▸ ";
+  color: var(--muted);
+}
+
+#contact-details[open] summary::before {
+  content: "▾ ";
+}
+
+#contact-details[open] summary {
+  border-radius: var(--radius) var(--radius) 0 0;
+  border-bottom: none;
+}
+
+#contact-details .contact-card {
+  border-radius: 0 0 var(--radius) var(--radius);
+  border-top: none;
+  box-shadow: none;
 }
 
 form {
