@@ -146,6 +146,27 @@
       <p id="import-status"></p>
     </div>
   </section>
+
+  <section class="card" id="contact-section">
+    <h2 data-i18n="contactHeading"></h2>
+    <p class="hint" data-i18n="contactHint"></p>
+    <form id="contact-form">
+      <label>
+        <span data-i18n="contactNameLabel"></span>
+        <input type="text" id="contact-name" data-i18n-placeholder="contactNamePlaceholder" />
+      </label>
+      <label>
+        <span data-i18n="contactEmailLabel"></span>
+        <input type="email" id="contact-email" data-i18n-placeholder="contactEmailPlaceholder" />
+      </label>
+      <label>
+        <span data-i18n="contactMessageLabel"></span>
+        <textarea id="contact-message" rows="4" data-i18n-placeholder="contactMessagePlaceholder" required></textarea>
+      </label>
+      <button type="submit" data-i18n="contactSendBtn"></button>
+      <p class="hint" data-i18n="contactMailtoHint"></p>
+    </form>
+  </section>
 </main>
 
 <footer class="site-footer">
