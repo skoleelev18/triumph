@@ -55,7 +55,7 @@ window.I18n = (function () {
 
       ocrHeading: "📷 Har du et bilde av pensum?",
       ocrHint: "Ta bilde av eller last opp en side fra læreboka, så leser vi ut teksten automatisk (fungerer best på rette, tydelige bilder av trykt tekst).",
-      ocrScanBtn: "📷 Ta bilde / last opp",
+      ocrScanBtn: "📷 Bildeopplastning",
       ocrReviewLabel: "Tekst funnet i bildet — sjekk og rediger om nødvendig",
       ocrUseBtn: "⬆️ Bruk denne teksten",
       ocrStarting: "Starter tekstgjenkjenning...",
@@ -83,9 +83,9 @@ window.I18n = (function () {
 
       addQuestionsHeading: "➕ Legg til spørsmål",
       tabManual: "✍️ Manuelt",
-      tabAi: "🤖 Med KI",
+      tabAi: "🤖 AI-hjelp",
       tabLk20: "📚 Læreplan",
-      tabOcr: "📷 Bilde",
+      tabOcr: "📷 Bildeløsning",
       findTopicHeading: "Vet du ikke helt hva du skal øve på?",
       manualHeading: "Legg til spørsmål manuelt",
       manualDeckLabel: "Tema",
@@ -257,7 +257,7 @@ window.I18n = (function () {
 
       ocrHeading: "📷 Got a picture of your textbook?",
       ocrHint: "Take or upload a photo of a page, and we'll read the text out automatically (works best on straight, clear photos of printed text).",
-      ocrScanBtn: "📷 Take photo / upload",
+      ocrScanBtn: "📷 Upload photo",
       ocrReviewLabel: "Text found in the image — check and edit if needed",
       ocrUseBtn: "⬆️ Use this text",
       ocrStarting: "Starting text recognition...",
@@ -285,9 +285,9 @@ window.I18n = (function () {
 
       addQuestionsHeading: "➕ Add questions",
       tabManual: "✍️ Manually",
-      tabAi: "🤖 With AI",
+      tabAi: "🤖 AI Help",
       tabLk20: "📚 Curriculum",
-      tabOcr: "📷 Photo",
+      tabOcr: "📷 Photo Upload",
       findTopicHeading: "Not sure what to study?",
       manualHeading: "Add a question manually",
       manualDeckLabel: "Topic",
