@@ -35,155 +35,170 @@
     <p id="deck-import-status"></p>
   </section>
 
-  <section class="card" id="manual-section">
-    <h2 data-i18n="manualHeading"></h2>
-    <form id="manual-question-form">
-      <label>
-        <span data-i18n="manualDeckLabel"></span>
-        <select id="manual-deck-select" required></select>
-      </label>
-      <label>
-        <span data-i18n="manualQuestionLabel"></span>
-        <input type="text" id="manual-question-text" data-i18n-placeholder="manualQuestionPlaceholder" required />
-      </label>
-      <div class="options-grid">
+  <section class="card" id="add-questions-section">
+    <h2 data-i18n="addQuestionsHeading"></h2>
+
+    <div class="tab-bar" id="add-questions-tabs">
+      <button type="button" class="tab-btn active" data-tab="tab-manual" data-i18n="tabManual"></button>
+      <button type="button" class="tab-btn" data-tab="tab-ai" data-i18n="tabAi"></button>
+    </div>
+
+    <div id="tab-manual" class="tab-panel">
+      <form id="manual-question-form">
         <label>
-          <span data-i18n="optionALabel"></span>
-          <input type="text" id="opt-0" required />
+          <span data-i18n="manualDeckLabel"></span>
+          <select id="manual-deck-select" required></select>
         </label>
         <label>
-          <span data-i18n="optionBLabel"></span>
-          <input type="text" id="opt-1" required />
+          <span data-i18n="manualQuestionLabel"></span>
+          <input type="text" id="manual-question-text" data-i18n-placeholder="manualQuestionPlaceholder" required />
         </label>
-        <label>
-          <span data-i18n="optionCLabel"></span>
-          <input type="text" id="opt-2" required />
-        </label>
-        <label>
-          <span data-i18n="optionDLabel"></span>
-          <input type="text" id="opt-3" required />
-        </label>
+        <div class="options-grid">
+          <label>
+            <span data-i18n="optionALabel"></span>
+            <input type="text" id="opt-0" required />
+          </label>
+          <label>
+            <span data-i18n="optionBLabel"></span>
+            <input type="text" id="opt-1" required />
+          </label>
+          <label>
+            <span data-i18n="optionCLabel"></span>
+            <input type="text" id="opt-2" required />
+          </label>
+          <label>
+            <span data-i18n="optionDLabel"></span>
+            <input type="text" id="opt-3" required />
+          </label>
+        </div>
+        <fieldset class="correct-answer">
+          <legend data-i18n="correctAnswerLegend"></legend>
+          <label><input type="radio" name="correct" value="0" checked /> A</label>
+          <label><input type="radio" name="correct" value="1" /> B</label>
+          <label><input type="radio" name="correct" value="2" /> C</label>
+          <label><input type="radio" name="correct" value="3" /> D</label>
+        </fieldset>
+        <button type="submit" data-i18n="addQuestionBtn"></button>
+      </form>
+    </div>
+
+    <div id="tab-ai" class="tab-panel hidden">
+      <p class="hint" data-i18n="aiHint"></p>
+
+      <div class="findtopic-widget">
+        <p class="findtopic-heading" data-i18n="findTopicHeading"></p>
+        <div class="tab-bar small" id="findtopic-tabs">
+          <button type="button" class="tab-btn active" data-tab="subtab-lk20" data-i18n="tabLk20"></button>
+          <button type="button" class="tab-btn" data-tab="subtab-ocr" data-i18n="tabOcr"></button>
+        </div>
+
+        <div id="subtab-lk20" class="tab-panel">
+          <p class="hint" data-i18n="lk20Hint"></p>
+          <div class="options-grid">
+            <label>
+              <span data-i18n="lk20LevelLabel"></span>
+              <select id="lk20-level-select"></select>
+            </label>
+            <label>
+              <span data-i18n="lk20SubjectLabel"></span>
+              <select id="lk20-subject-select"></select>
+            </label>
+          </div>
+          <label>
+            <span data-i18n="lk20TopicLabel"></span>
+            <select id="lk20-topic-select"></select>
+          </label>
+          <button id="lk20-use-btn" type="button" class="secondary" data-i18n="lk20UseBtn"></button>
+        </div>
+
+        <div id="subtab-ocr" class="tab-panel hidden">
+          <p class="hint" data-i18n="ocrHint"></p>
+          <div class="ocr-controls">
+            <button id="ocr-scan-btn" type="button" class="secondary" data-i18n="ocrScanBtn"></button>
+            <input type="file" id="ocr-file-input" accept="image/*" capture="environment" class="hidden" />
+          </div>
+          <p id="ocr-status" class="ocr-status hidden"></p>
+          <div id="ocr-review-block" class="hidden">
+            <label>
+              <span data-i18n="ocrReviewLabel"></span>
+              <textarea id="ocr-review-text" rows="5"></textarea>
+            </label>
+            <button id="ocr-use-btn" type="button" class="secondary" data-i18n="ocrUseBtn"></button>
+          </div>
+        </div>
       </div>
-      <fieldset class="correct-answer">
-        <legend data-i18n="correctAnswerLegend"></legend>
-        <label><input type="radio" name="correct" value="0" checked /> A</label>
-        <label><input type="radio" name="correct" value="1" /> B</label>
-        <label><input type="radio" name="correct" value="2" /> C</label>
-        <label><input type="radio" name="correct" value="3" /> D</label>
-      </fieldset>
-      <button type="submit" data-i18n="addQuestionBtn"></button>
-    </form>
+
+      <form id="ai-prompt-form">
+        <label>
+          <span data-i18n="aiTopicLabel"></span>
+          <input type="text" id="ai-topic" data-i18n-placeholder="aiTopicPlaceholder" required />
+        </label>
+        <div class="options-grid">
+          <label>
+            <span data-i18n="aiCountLabel"></span>
+            <input type="number" id="ai-count" min="1" max="20" value="5" required />
+          </label>
+          <label>
+            <span data-i18n="aiLevelLabel"></span>
+            <select id="ai-level">
+              <option value="lett" data-i18n="aiLevelEasy"></option>
+              <option value="middels" selected data-i18n="aiLevelMedium"></option>
+              <option value="vanskelig" data-i18n="aiLevelHard"></option>
+            </select>
+          </label>
+        </div>
+        <label>
+          <span data-i18n="aiContextLabel"></span>
+          <textarea id="ai-context" rows="2" data-i18n-placeholder="aiContextPlaceholder"></textarea>
+        </label>
+        <button type="submit" data-i18n="aiMakePromptBtn"></button>
+      </form>
+
+      <div id="ai-prompt-result" class="hidden">
+        <label>
+          <span data-i18n="aiPromptOutputLabel"></span>
+          <textarea id="ai-prompt-output" rows="8" readonly></textarea>
+        </label>
+        <button id="copy-prompt-btn" type="button" data-i18n="aiCopyBtn"></button>
+      </div>
+
+      <div id="ai-import-block">
+        <label>
+          <span data-i18n="aiResponseLabel"></span>
+          <textarea id="ai-response-input" rows="8" data-i18n-placeholder="aiResponsePlaceholder"></textarea>
+        </label>
+        <label>
+          <span data-i18n="aiImportDeckLabel"></span>
+          <select id="ai-import-deck-select"></select>
+        </label>
+        <button id="import-questions-btn" type="button" data-i18n="aiImportBtn"></button>
+        <p id="import-status"></p>
+      </div>
+    </div>
   </section>
 
-  <section class="card" id="ai-section">
-    <h2 data-i18n="aiHeading"></h2>
-    <p class="hint" data-i18n="aiHint"></p>
-
-    <div id="lk20-picker" class="lk20-picker">
-      <p class="lk20-heading" data-i18n="lk20Heading"></p>
-      <p class="hint" data-i18n="lk20Hint"></p>
-      <div class="options-grid">
+  <details id="contact-details">
+    <summary data-i18n="contactHeading"></summary>
+    <div class="card contact-card">
+      <p class="hint" data-i18n="contactHint"></p>
+      <form id="contact-form">
         <label>
-          <span data-i18n="lk20LevelLabel"></span>
-          <select id="lk20-level-select"></select>
+          <span data-i18n="contactNameLabel"></span>
+          <input type="text" id="contact-name" data-i18n-placeholder="contactNamePlaceholder" />
         </label>
         <label>
-          <span data-i18n="lk20SubjectLabel"></span>
-          <select id="lk20-subject-select"></select>
+          <span data-i18n="contactEmailLabel"></span>
+          <input type="email" id="contact-email" data-i18n-placeholder="contactEmailPlaceholder" />
         </label>
-      </div>
-      <label>
-        <span data-i18n="lk20TopicLabel"></span>
-        <select id="lk20-topic-select"></select>
-      </label>
-      <button id="lk20-use-btn" type="button" class="secondary" data-i18n="lk20UseBtn"></button>
+        <label>
+          <span data-i18n="contactMessageLabel"></span>
+          <textarea id="contact-message" rows="4" data-i18n-placeholder="contactMessagePlaceholder" required></textarea>
+        </label>
+        <button type="submit" data-i18n="contactSendBtn"></button>
+        <p class="hint" data-i18n="contactMailtoHint"></p>
+      </form>
     </div>
-
-    <div id="ocr-picker" class="lk20-picker">
-      <p class="lk20-heading" data-i18n="ocrHeading"></p>
-      <p class="hint" data-i18n="ocrHint"></p>
-      <div class="ocr-controls">
-        <button id="ocr-scan-btn" type="button" class="secondary" data-i18n="ocrScanBtn"></button>
-        <input type="file" id="ocr-file-input" accept="image/*" capture="environment" class="hidden" />
-      </div>
-      <p id="ocr-status" class="ocr-status hidden"></p>
-      <div id="ocr-review-block" class="hidden">
-        <label>
-          <span data-i18n="ocrReviewLabel"></span>
-          <textarea id="ocr-review-text" rows="5"></textarea>
-        </label>
-        <button id="ocr-use-btn" type="button" class="secondary" data-i18n="ocrUseBtn"></button>
-      </div>
-    </div>
-
-    <form id="ai-prompt-form">
-      <label>
-        <span data-i18n="aiTopicLabel"></span>
-        <input type="text" id="ai-topic" data-i18n-placeholder="aiTopicPlaceholder" required />
-      </label>
-      <div class="options-grid">
-        <label>
-          <span data-i18n="aiCountLabel"></span>
-          <input type="number" id="ai-count" min="1" max="20" value="5" required />
-        </label>
-        <label>
-          <span data-i18n="aiLevelLabel"></span>
-          <select id="ai-level">
-            <option value="lett" data-i18n="aiLevelEasy"></option>
-            <option value="middels" selected data-i18n="aiLevelMedium"></option>
-            <option value="vanskelig" data-i18n="aiLevelHard"></option>
-          </select>
-        </label>
-      </div>
-      <label>
-        <span data-i18n="aiContextLabel"></span>
-        <textarea id="ai-context" rows="2" data-i18n-placeholder="aiContextPlaceholder"></textarea>
-      </label>
-      <button type="submit" data-i18n="aiMakePromptBtn"></button>
-    </form>
-
-    <div id="ai-prompt-result" class="hidden">
-      <label>
-        <span data-i18n="aiPromptOutputLabel"></span>
-        <textarea id="ai-prompt-output" rows="8" readonly></textarea>
-      </label>
-      <button id="copy-prompt-btn" type="button" data-i18n="aiCopyBtn"></button>
-    </div>
-
-    <div id="ai-import-block">
-      <label>
-        <span data-i18n="aiResponseLabel"></span>
-        <textarea id="ai-response-input" rows="8" data-i18n-placeholder="aiResponsePlaceholder"></textarea>
-      </label>
-      <label>
-        <span data-i18n="aiImportDeckLabel"></span>
-        <select id="ai-import-deck-select"></select>
-      </label>
-      <button id="import-questions-btn" type="button" data-i18n="aiImportBtn"></button>
-      <p id="import-status"></p>
-    </div>
-  </section>
-
-  <section class="card" id="contact-section">
-    <h2 data-i18n="contactHeading"></h2>
-    <p class="hint" data-i18n="contactHint"></p>
-    <form id="contact-form">
-      <label>
-        <span data-i18n="contactNameLabel"></span>
-        <input type="text" id="contact-name" data-i18n-placeholder="contactNamePlaceholder" />
-      </label>
-      <label>
-        <span data-i18n="contactEmailLabel"></span>
-        <input type="email" id="contact-email" data-i18n-placeholder="contactEmailPlaceholder" />
-      </label>
-      <label>
-        <span data-i18n="contactMessageLabel"></span>
-        <textarea id="contact-message" rows="4" data-i18n-placeholder="contactMessagePlaceholder" required></textarea>
-      </label>
-      <button type="submit" data-i18n="contactSendBtn"></button>
-      <p class="hint" data-i18n="contactMailtoHint"></p>
-    </form>
-  </section>
+  </details>
 </main>
 
 <footer class="site-footer">
@@ -200,6 +215,7 @@
 <script src="js/share.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/tesseract.js@5/dist/tesseract.min.js"></script>
 <script src="js/ocr.js"></script>
+<script src="js/tabs.js"></script>
 <script src="js/main.js"></script>
 </body>
 </html>
