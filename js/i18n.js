@@ -107,6 +107,17 @@ window.I18n = (function () {
 
       footerNote: "Laget for egen læring. Data lagres kun lokalt i din nettleser.",
 
+      contactHeading: "📬 Kontakt support",
+      contactHint: "Fant du en feil, eller har du et forslag? Send oss en melding!",
+      contactNameLabel: "Navn (valgfritt)",
+      contactNamePlaceholder: "Ditt navn",
+      contactEmailLabel: "E-post (valgfritt, om du vil ha svar)",
+      contactEmailPlaceholder: "din@epost.no",
+      contactMessageLabel: "Melding",
+      contactMessagePlaceholder: "Skriv meldingen din her...",
+      contactSendBtn: "📤 Send melding",
+      contactMailtoHint: "Åpner din e-postapp med meldingen ferdig utfylt, sendt til supportskoleelev18@gmail.com.",
+
       backLink: "← Tilbake",
       pointsLabel: "Poeng",
       recordLabel: "Rekord",
@@ -280,6 +291,17 @@ window.I18n = (function () {
       aiImportSuccess: "✅ Added {count} questions!",
 
       footerNote: "Made for personal learning. Data is only stored locally in your browser.",
+
+      contactHeading: "📬 Contact support",
+      contactHint: "Found a bug, or have a suggestion? Send us a message!",
+      contactNameLabel: "Name (optional)",
+      contactNamePlaceholder: "Your name",
+      contactEmailLabel: "Email (optional, if you'd like a reply)",
+      contactEmailPlaceholder: "you@email.com",
+      contactMessageLabel: "Message",
+      contactMessagePlaceholder: "Write your message here...",
+      contactSendBtn: "📤 Send message",
+      contactMailtoHint: "Opens your email app with the message filled in, sent to supportskoleelev18@gmail.com.",
 
       backLink: "← Back",
       pointsLabel: "Score",

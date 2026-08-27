@@ -34,6 +34,10 @@ const lk20UseBtn = document.getElementById("lk20-use-btn");
 const aiTopicInput = document.getElementById("ai-topic");
 const aiContextInput = document.getElementById("ai-context");
 const aiLevelSelect = document.getElementById("ai-level");
+const contactForm = document.getElementById("contact-form");
+const contactName = document.getElementById("contact-name");
+const contactEmail = document.getElementById("contact-email");
+const contactMessage = document.getElementById("contact-message");
 
 let expandedDeckId = null;
 const t = window.I18n.t;
@@ -331,6 +335,26 @@ importFileInput.addEventListener("change", () => {
     }
   };
   reader.readAsText(file);
+});
+
+contactForm.addEventListener("submit", (e) => {
+  e.preventDefault();
+  const name = contactName.value.trim();
+  const email = contactEmail.value.trim();
+  const message = contactMessage.value.trim();
+  if (!message) return;
+
+  const subject = `Triumph — melding fra ${name || "en besøkende"}`;
+  const bodyLines = [];
+  if (name) bodyLines.push(`Navn: ${name}`);
+  if (email) bodyLines.push(`E-post: ${email}`);
+  bodyLines.push("", message);
+  const body = bodyLines.join("\n");
+
+  const mailto = `mailto:supportskoleelev18@gmail.com?subject=${encodeURIComponent(
+    subject
+  )}&body=${encodeURIComponent(body)}`;
+  window.location.href = mailto;
 });
 
 function importFromUrl() {
