@@ -99,6 +99,23 @@
       <button id="lk20-use-btn" type="button" class="secondary" data-i18n="lk20UseBtn"></button>
     </div>
 
+    <div id="ocr-picker" class="lk20-picker">
+      <p class="lk20-heading" data-i18n="ocrHeading"></p>
+      <p class="hint" data-i18n="ocrHint"></p>
+      <div class="ocr-controls">
+        <button id="ocr-scan-btn" type="button" class="secondary" data-i18n="ocrScanBtn"></button>
+        <input type="file" id="ocr-file-input" accept="image/*" capture="environment" class="hidden" />
+      </div>
+      <p id="ocr-status" class="ocr-status hidden"></p>
+      <div id="ocr-review-block" class="hidden">
+        <label>
+          <span data-i18n="ocrReviewLabel"></span>
+          <textarea id="ocr-review-text" rows="5"></textarea>
+        </label>
+        <button id="ocr-use-btn" type="button" class="secondary" data-i18n="ocrUseBtn"></button>
+      </div>
+    </div>
+
     <form id="ai-prompt-form">
       <label>
         <span data-i18n="aiTopicLabel"></span>
@@ -181,6 +198,8 @@
 <script src="js/lk20.js"></script>
 <script src="js/ai-helper.js"></script>
 <script src="js/share.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/tesseract.js@5/dist/tesseract.min.js"></script>
+<script src="js/ocr.js"></script>
 <script src="js/main.js"></script>
 </body>
 </html>

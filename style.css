@@ -173,6 +173,21 @@ main {
   font-weight: 700;
 }
 
+.ocr-controls {
+  display: flex;
+  gap: 0.6rem;
+}
+
+.ocr-status {
+  margin: 0;
+  font-weight: 600;
+  color: var(--muted);
+}
+
+.ocr-status.error {
+  color: var(--danger);
+}
+
 form {
   display: flex;
   flex-direction: column;
