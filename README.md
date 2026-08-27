@@ -38,11 +38,18 @@ npx http-server .
    > holder API-nøkkelen skjult og kaller KI-en for deg — det er neste
    > steg om du ønsker det.
 
-   > **Vet du ikke helt hva du skal øve på?** Bruk 📚 LK20-velgeren
-   > over KI-skjemaet: velg trinn (ungdomsskole eller videregående
-   > studiespesialiserende), fag og tema fra læreplanen — hentet fra
-   > udir.no sine offisielle kjerneelementer — og trykk "Bruk dette
-   > temaet" for å fylle inn feltene automatisk.
+   > **Vet du ikke helt hva du skal øve på?** Under "🤖 Med KI"-fanen
+   > finner du en "Finn et tema"-boks med to underfaner:
+   > - **📚 Læreplan** — velg trinn (ungdomsskole eller videregående
+   >   studiespesialiserende), fag og tema fra læreplanen — hentet fra
+   >   udir.no sine offisielle kjerneelementer.
+   > - **📷 Bilde** — ta eller last opp et bilde av en side i læreboka,
+   >   så leses teksten ut automatisk (kjører i nettleseren via
+   >   Tesseract.js, ingen server involvert — fungerer best på rette,
+   >   tydelige bilder av trykt tekst).
+   >
+   > Trykk "Bruk dette temaet" / "Bruk denne teksten" for å fylle inn
+   > feltene under automatisk.
 
 3. **Spill!** Velg en spillmodus på et tema:
    - **▶ Flappy Quiz** — hver gang du får poeng, dukker det opp et
@@ -66,6 +73,9 @@ npx http-server .
    "📁 Importer fra fil".
 7. **Bytt språk** når som helst med språkvelgeren øverst på hver side —
    valget lagres og gjelder på alle sidene.
+8. **Kontakt support** — nederst på hjemmesiden, i en nedtrekkbar
+   seksjon. Sender en e-post via din egen e-postapp til
+   supportskoleelev18@gmail.com.
 
 ## Publisere til GitHub Pages
 
@@ -108,6 +118,8 @@ quizspill/
     ├── theme.js         De 10 kjøpbare fargetemaene + hvilket som er aktivt
     ├── share.js         Koder/dekoder temaer til delbare lenker
     ├── lk20.js          Kjerneelementer fra LK20 (kilde: udir.no), for temavelgeren
+    ├── ocr.js           Leser tekst ut av bilder (Tesseract.js) til KI-konteksten
+    ├── tabs.js          Generisk fane-system, brukt på hjemmesiden
     ├── ai-helper.js     Bygger KI-prompt + tolker JSON-svar
     ├── main.js          Logikk for hjemmesiden
     ├── flappy.js        Spillmotor for Flappy Quiz
@@ -131,8 +143,12 @@ quizspill/
 - [x] Flerspråksstøtte (norsk/engelsk), lett å utvide med flere språk
 - [x] LK20-temavelger: ungdomsskole + 17 studiespesialiserende programfag på
       videregående, ekte kjerneelementer fra udir.no
+- [x] Bilde-til-tekst (OCR) for pensum, via Tesseract.js i nettleseren
+- [x] Kontakt support-skjema (mailto) nederst på hjemmesiden
+- [x] Fane-basert forside — mindre scrolling, tydeligere seksjoner
 - [ ] Flere LK20-utdanningslinjer (f.eks. yrkesfag, egne matematikkfag på vgo)
-- [ ] Eventuelt: egen server-funksjon for direkte KI-integrasjon
+- [ ] Eventuelt: egen server-funksjon for direkte KI-integrasjon eller EmailJS
+      for stille support-utsending
 
 ---
 🕹️ Triumph — by skoleelev18
