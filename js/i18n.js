@@ -9,6 +9,20 @@ window.I18n = (function () {
       appTagline: "Øv til prøver, eksamen og presentasjoner — gjennom spill.",
       langLabel: "Språk",
 
+      onboardingHeading: "Kom i gang på 3 steg",
+      onboardingStep1Title: "1. Lag et tema",
+      onboardingStep1Text: "Gi temaet et navn, f.eks. «Andre verdenskrig».",
+      onboardingStep2Title: "2. Legg til spørsmål",
+      onboardingStep2Text: "Skriv dem inn selv, eller bruk AI-hjelp/læreplan under.",
+      onboardingStep3Title: "3. Velg en spillmodus",
+      onboardingStep3Text: "Vi anbefaler å starte med Flashcards.",
+
+      modeFlappyDesc: "Lær mens du styrer en fugl gjennom rør.",
+      modeBlackjackDesc: "Svar riktig for å tjene spillbrikker til bordet.",
+      modeFlashcardsDesc: "Snu kortet og vurder om du kunne svaret. Anbefalt for nye temaer.",
+      modeTrueFalseDesc: "Rask quiz: er påstanden sann eller usann?",
+      modeProgressDesc: "Se hvor godt du kan hvert spørsmål.",
+
       decksHeading: "Dine temaer",
       newDeckPlaceholder: "Navn på nytt tema (f.eks. «Andre verdenskrig»)",
       newDeckBtn: "+ Nytt tema",
@@ -210,6 +224,20 @@ window.I18n = (function () {
     en: {
       appTagline: "Practice for tests, exams and presentations — through games.",
       langLabel: "Language",
+
+      onboardingHeading: "Get started in 3 steps",
+      onboardingStep1Title: "1. Create a topic",
+      onboardingStep1Text: "Give it a name, e.g. «World War II».",
+      onboardingStep2Title: "2. Add questions",
+      onboardingStep2Text: "Write them yourself, or use AI help/curriculum below.",
+      onboardingStep3Title: "3. Pick a game mode",
+      onboardingStep3Text: "We recommend starting with Flashcards.",
+
+      modeFlappyDesc: "Learn while flying a bird through pipes.",
+      modeBlackjackDesc: "Answer correctly to earn chips for the table.",
+      modeFlashcardsDesc: "Flip the card and rate if you knew it. Recommended for new topics.",
+      modeTrueFalseDesc: "Quick quiz: is the statement true or false?",
+      modeProgressDesc: "See how well you know each question.",
 
       decksHeading: "Your topics",
       newDeckPlaceholder: "Name of new topic (e.g. «World War II»)",

@@ -448,6 +448,58 @@ button.danger:hover {
   font-style: italic;
 }
 
+.onboarding-card {
+  border: 1px dashed var(--primary);
+  background: color-mix(in srgb, var(--primary) 6%, var(--card-bg));
+}
+
+.onboarding-steps {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-top: 0.5rem;
+}
+
+.onboarding-step {
+  flex: 1 1 180px;
+  min-width: 160px;
+}
+
+.onboarding-step-title {
+  font-weight: 700;
+  margin: 0 0 0.2rem;
+}
+
+.onboarding-step-text {
+  color: var(--muted);
+  font-size: 0.9rem;
+  margin: 0;
+}
+
+.mode-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+  width: 100%;
+}
+
+.mode-item {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+  max-width: 220px;
+}
+
+.mode-desc {
+  color: var(--muted);
+  font-size: 0.75rem;
+  line-height: 1.2;
+}
+
+.mode-recommended-badge {
+  margin-right: 0.3rem;
+}
+
 #import-status,
 #deck-import-status {
   font-size: 0.9rem;

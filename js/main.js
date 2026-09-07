@@ -39,6 +39,8 @@ const contactName = document.getElementById("contact-name");
 const contactEmail = document.getElementById("contact-email");
 const contactMessage = document.getElementById("contact-message");
 
+const onboardingSection = document.getElementById("onboarding-section");
+
 let expandedDeckId = null;
 const t = window.I18n.t;
 
@@ -47,6 +49,12 @@ function render() {
   renderDeckList(decks);
   renderDeckSelect(manualDeckSelect, decks);
   renderDeckSelect(aiImportDeckSelect, decks);
+  renderOnboarding(decks);
+}
+
+function renderOnboarding(decks) {
+  const hasQuestions = decks.some((d) => d.questions.length > 0);
+  onboardingSection.classList.toggle("hidden", hasQuestions);
 }
 
 function renderDeckSelect(selectEl, decks) {
@@ -142,6 +150,31 @@ function renderDeckList(decks) {
       });
     }
 
+    const modeList = document.createElement("div");
+    modeList.className = "mode-list";
+    const modeDescKeys = [
+      ["flappy", playLink, "modeFlappyDesc"],
+      ["blackjack", blackjackLink, "modeBlackjackDesc"],
+      ["flashcards", flashcardsLink, "modeFlashcardsDesc"],
+      ["truefalse", trueFalseLink, "modeTrueFalseDesc"],
+      ["progress", progressLink, "modeProgressDesc"],
+    ];
+    for (const [key, link, descKey] of modeDescKeys) {
+      const item = document.createElement("div");
+      item.className = "mode-item";
+      if (key === "flashcards" && deck.questions.length > 0) {
+        const badge = document.createElement("span");
+        badge.className = "mode-recommended-badge";
+        badge.textContent = "⭐";
+        link.prepend(badge);
+      }
+      const desc = document.createElement("small");
+      desc.className = "mode-desc";
+      desc.textContent = t(descKey);
+      item.append(link, desc);
+      modeList.appendChild(item);
+    }
+
     const toggleBtn = document.createElement("button");
     toggleBtn.className = "secondary";
     toggleBtn.textContent = expandedDeckId === deck.id ? t("hideQuestions") : t("showQuestions");
@@ -170,7 +203,7 @@ function renderDeckList(decks) {
       }
     });
 
-    actions.append(playLink, blackjackLink, flashcardsLink, trueFalseLink, progressLink, toggleBtn, exportBtn, shareBtn, deleteBtn);
+    actions.append(modeList, toggleBtn, exportBtn, shareBtn, deleteBtn);
     card.append(info, actions);
     deckListEl.appendChild(card);
 
