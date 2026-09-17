@@ -122,6 +122,19 @@ function resetDeckStats(deckId) {
   saveDecks(decks);
 }
 
+function updateQuestion(deckId, questionId, updates) {
+  const decks = loadDecks();
+  const deck = decks.find((d) => d.id === deckId);
+  if (!deck) return null;
+  const q = deck.questions.find((q) => q.id === questionId);
+  if (!q) return null;
+  q.question = updates.question.trim();
+  q.options = updates.options.map((o) => o.trim());
+  q.correctIndex = updates.correctIndex;
+  saveDecks(decks);
+  return q;
+}
+
 function deleteQuestion(deckId, questionId) {
   const decks = loadDecks();
   const deck = decks.find((d) => d.id === deckId);
@@ -203,6 +216,7 @@ return {
   addQuestion,
   importQuestions,
   importDeck,
+  updateQuestion,
   deleteQuestion,
   recordAnswer,
   resetDeckStats,

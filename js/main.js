@@ -4,6 +4,7 @@ const {
   createDeck,
   deleteDeck,
   addQuestion,
+  updateQuestion,
   deleteQuestion,
   importQuestions,
   importDeck,
@@ -42,6 +43,7 @@ const contactMessage = document.getElementById("contact-message");
 const onboardingSection = document.getElementById("onboarding-section");
 
 let expandedDeckId = null;
+let editingQuestionId = null;
 const t = window.I18n.t;
 
 function render() {
@@ -217,11 +219,22 @@ function renderDeckList(decks) {
         list.appendChild(empty);
       } else {
         for (const q of deck.questions) {
+          if (editingQuestionId === q.id) {
+            list.appendChild(renderQuestionEditForm(deck, q));
+            continue;
+          }
           const item = document.createElement("div");
           item.className = "question-item";
           const correctText = q.options[q.correctIndex];
           const span = document.createElement("span");
           span.textContent = t("questionListItem", { question: q.question, answer: correctText });
+          const editBtn = document.createElement("button");
+          editBtn.className = "secondary";
+          editBtn.textContent = t("editBtn");
+          editBtn.addEventListener("click", () => {
+            editingQuestionId = q.id;
+            renderDeckList(decks);
+          });
           const del = document.createElement("button");
           del.className = "danger";
           del.textContent = t("deleteBtn");
@@ -229,13 +242,78 @@ function renderDeckList(decks) {
             deleteQuestion(deck.id, q.id);
             render();
           });
-          item.append(span, del);
+          item.append(span, editBtn, del);
           list.appendChild(item);
         }
       }
       deckListEl.appendChild(list);
     }
   }
+}
+
+function renderQuestionEditForm(deck, q) {
+  const form = document.createElement("form");
+  form.className = "question-edit-form";
+
+  const questionInput = document.createElement("input");
+  questionInput.type = "text";
+  questionInput.required = true;
+  questionInput.value = q.question;
+  form.appendChild(questionInput);
+
+  const optionsWrap = document.createElement("div");
+  optionsWrap.className = "options-grid";
+  const optionInputs = q.options.map((opt, i) => {
+    const label = document.createElement("label");
+    const radio = document.createElement("input");
+    radio.type = "radio";
+    radio.name = `correct-${q.id}`;
+    radio.value = String(i);
+    radio.checked = i === q.correctIndex;
+    const input = document.createElement("input");
+    input.type = "text";
+    input.required = true;
+    input.value = opt;
+    label.append(radio, input);
+    optionsWrap.appendChild(label);
+    return { radio, input };
+  });
+  form.appendChild(optionsWrap);
+
+  const hint = document.createElement("p");
+  hint.className = "hint";
+  hint.textContent = t("editCorrectAnswerHint");
+  form.appendChild(hint);
+
+  const actions = document.createElement("div");
+  actions.className = "deck-actions";
+  const saveBtn = document.createElement("button");
+  saveBtn.type = "submit";
+  saveBtn.textContent = t("saveBtn");
+  const cancelBtn = document.createElement("button");
+  cancelBtn.type = "button";
+  cancelBtn.className = "secondary";
+  cancelBtn.textContent = t("cancelBtn");
+  cancelBtn.addEventListener("click", () => {
+    editingQuestionId = null;
+    render();
+  });
+  actions.append(saveBtn, cancelBtn);
+  form.appendChild(actions);
+
+  form.addEventListener("submit", (e) => {
+    e.preventDefault();
+    const correctIndex = optionInputs.findIndex(({ radio }) => radio.checked);
+    updateQuestion(deck.id, q.id, {
+      question: questionInput.value,
+      options: optionInputs.map(({ input }) => input.value),
+      correctIndex,
+    });
+    editingQuestionId = null;
+    render();
+  });
+
+  return form;
 }
 
 function downloadDeck(deckId) {

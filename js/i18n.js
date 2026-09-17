@@ -94,6 +94,10 @@ window.I18n = (function () {
       noQuestionsInDeck: "Ingen spørsmål i dette temaet ennå.",
       questionListItem: "{question} — Riktig: {answer}",
       deleteBtn: "Slett",
+      editBtn: "✏️ Rediger",
+      saveBtn: "💾 Lagre",
+      cancelBtn: "Avbryt",
+      editCorrectAnswerHint: "Velg hvilket alternativ som er riktig svar.",
 
       addQuestionsHeading: "➕ Legg til spørsmål",
       tabManual: "✍️ Manuelt",
@@ -310,6 +314,10 @@ window.I18n = (function () {
       noQuestionsInDeck: "No questions in this topic yet.",
       questionListItem: "{question} — Correct: {answer}",
       deleteBtn: "Delete",
+      editBtn: "✏️ Edit",
+      saveBtn: "💾 Save",
+      cancelBtn: "Cancel",
+      editCorrectAnswerHint: "Choose which option is the correct answer.",
 
       addQuestionsHeading: "➕ Add questions",
       tabManual: "✍️ Manually",

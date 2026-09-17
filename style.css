@@ -534,6 +534,25 @@ button.danger:hover {
   font-size: 0.9rem;
 }
 
+.question-edit-form {
+  border: 1px solid var(--primary);
+  border-radius: 8px;
+  padding: 0.7rem 0.8rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.question-edit-form .options-grid label {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.question-edit-form .options-grid input[type="text"] {
+  flex: 1;
+}
+
 .site-footer {
   text-align: center;
   color: var(--muted);
